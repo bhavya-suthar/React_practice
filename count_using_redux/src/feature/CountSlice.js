@@ -12,10 +12,16 @@ const countSlice = createSlice({
         },
         decrement:(state)=>{
             state.count -=1
+        },
+        incByTen:(state,action)=>{
+            state.count +=action.payload
+        },
+        decByTen:(state,action)=>{
+            state.count -=action.payload
         }
 
     }
 })
 
-export const {increment,decrement} = countSlice.actions
+export const {increment,decrement,incByTen,decByTen} = countSlice.actions
 export default countSlice.reducer
