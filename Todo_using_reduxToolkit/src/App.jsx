@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import './App.css'
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { addTodo } from './Feature/TodoSlice';
+import List from './List';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [input,setInput] = useState('')
+  console.log("🚀 ~ App ~ input:", input)
+  const dispatch = useDispatch()
+
+  const addTodoHandler = (e)=>{
+    e.preventDefault()
+    dispatch(addTodo(input))
+    setInput('')
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+       <h1>Todo using ReduxToolkit</h1>
+     <div className='container d-flex py-5 px-5 gap-3 justify-content-center'>
+      <input type='text' value={input} placeholder='Enter your Task' onChange={(e)=>setInput(e.target.value)}/>
+        <Button onClick={addTodoHandler} className="todoBtn">Add</Button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <List/>
     </>
   )
 }
