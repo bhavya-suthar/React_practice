@@ -1,21 +1,25 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo } from "./Feature/TodoSlice";
+import { removeTodo,updateTodo } from "./Feature/TodoSlice";
 import { Button } from "react-bootstrap";
 
-const List = () => {
-  const todos = useSelector((state) => state.todos);
-  console.log("🚀 ~ List ~ todos:", todos);
+const List = ({input}) => {
+  const todosData = useSelector((state) => state.todo);
+  console.log("🚀 ~ List ~ todosData:", todosData)
   const dispatch = useDispatch();
   return (
     <>
     <ul className="container">
-      {todos.map((todo) => {
+      {todosData.todos.map((todo) => {
         return (
           <li key={todo.id} style={{listStyle:"none",display:"flex",gap:"14px",alignItems:"center",justifyContent:"center",padding:"10px"}}>
             {todo.text}
             <Button variant="danger" onClick={() => dispatch(removeTodo(todo.id))}>
               Delete
+            </Button>
+            
+            <Button variant="warning" onClick={() => dispatch(updateTodo({id:todo.id,text: todo.text}))}>
+              Update
             </Button>
           </li>
         );

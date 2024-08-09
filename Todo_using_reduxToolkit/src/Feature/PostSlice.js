@@ -1,16 +1,12 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-  todos: [],
-  IsEdit: {
-    text : "",
-  },
-  inputValue:""
-
+  post: [],
+  
 };
 
-const todoSlice = createSlice({
-  name: "todo",
+const postSlice = createSlice({
+  name: "Post",
   initialState,
   reducers: {
     addTodo: (state, action) => {
@@ -44,6 +40,6 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo,updateTodo,setInputValue } = todoSlice.actions;
+export const { addTodo, removeTodo,updateTodo,setInputValue } = postSlice.actions;
 
-export default todoSlice.reducer;
+export default postSlice.reducer;
