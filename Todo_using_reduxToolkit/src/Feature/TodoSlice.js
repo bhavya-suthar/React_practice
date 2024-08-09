@@ -3,10 +3,10 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 const initialState = {
   todos: [],
   IsEdit: {
-    text : "",
+    text: "",
+    id: null,
   },
-  inputValue:""
-
+  inputValue: "",
 };
 
 const todoSlice = createSlice({
@@ -14,36 +14,39 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
+      // debugger
       const todo = { id: nanoid(), text: action.payload };
       state.todos.push(todo);
     },
     removeTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
-    updateTodo:(state,action)=>{
-    //    const updatedTodo=  state.todos.map((todo)=>{
-    //        if( todo.id === action.payload){
-    //             return action.payload
-    //        }else{
-    //         return state
-    //        }
-    //     })
-
-    
-    // return {
-    //     ...state,
-    //     isEdit : action.payload,
-    //     inputValue : action.payload.text
-    // }
-    state.IsEdit = action.payload;
-    state.inputValue = action.payload.text
+    updateTodo: (state, action) => {
+      state.IsEdit = action.payload;
+      state.inputValue = action.payload.text;
     },
-    setInputValue :(state,action)=>{
-          state.inputValue = action.payload
-    }
+    setInputValue: (state, action) => {
+      state.inputValue = action.payload;
+    },
+    EditTodo: (state, action) => {
+      debugger
+      const updatedTodos = state.todos.map((todo) =>
+        todo.id === state.IsEdit.id
+          ? { text: state.inputValue }
+          : todo
+      );
+      console.log("🚀 ~ updatedTodos:", updatedTodos);
+      state.todos = updatedTodos;
+
+      state.IsEdit = {
+        text: "",
+        id: null,
+      };
+      state.inputValue =""
+    },
   },
 });
 
-export const { addTodo, removeTodo,updateTodo,setInputValue } = todoSlice.actions;
+export const { addTodo, removeTodo, updateTodo, setInputValue, EditTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
