@@ -7,6 +7,7 @@ const initialState = {
     id: null,
   },
   inputValue: "",
+  IsSelected : false,
 };
 
 const todoSlice = createSlice({
@@ -29,10 +30,10 @@ const todoSlice = createSlice({
       state.inputValue = action.payload;
     },
     EditTodo: (state, action) => {
-      debugger
+      // debugger
       const updatedTodos = state.todos.map((todo) =>
         todo.id === state.IsEdit.id
-          ? { text: state.inputValue }
+          ? {...todo, text: state.inputValue }
           : todo
       );
       console.log("🚀 ~ updatedTodos:", updatedTodos);
@@ -44,6 +45,9 @@ const todoSlice = createSlice({
       };
       state.inputValue =""
     },
+    CheckboxAction:(state,action)=>{
+      state.IsSelected 
+    }
   },
 });
 
