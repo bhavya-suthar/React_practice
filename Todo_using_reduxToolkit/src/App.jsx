@@ -1,8 +1,9 @@
 // import './App.css'
-import Button from "react-bootstrap/Button";
+import {Button} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import {ClearAll} from '../src/Feature/TodoSlice'
 import {
   addTodo,
   setInputValue,
@@ -48,6 +49,9 @@ function App() {
             Edit
           </Button>
         )}
+        <Button variant="danger" onClick={()=>dispatch(ClearAll())} className="todoBtn">
+            Clear All
+          </Button>
       </div>
       <List props={input} />
     </>

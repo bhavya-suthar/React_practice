@@ -7,7 +7,6 @@ const initialState = {
     id: null,
   },
   inputValue: "",
-  IsSelected : false,
 };
 
 const todoSlice = createSlice({
@@ -16,7 +15,7 @@ const todoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       // debugger
-      const todo = { id: nanoid(), text: action.payload };
+      const todo = { id: nanoid(), text: action.payload, IsSelected: false };
       state.todos.push(todo);
     },
     removeTodo: (state, action) => {
@@ -32,9 +31,7 @@ const todoSlice = createSlice({
     EditTodo: (state, action) => {
       // debugger
       const updatedTodos = state.todos.map((todo) =>
-        todo.id === state.IsEdit.id
-          ? {...todo, text: state.inputValue }
-          : todo
+        todo.id === state.IsEdit.id ? { ...todo, text: state.inputValue } : todo
       );
       console.log("🚀 ~ updatedTodos:", updatedTodos);
       state.todos = updatedTodos;
@@ -43,14 +40,49 @@ const todoSlice = createSlice({
         text: "",
         id: null,
       };
-      state.inputValue =""
+      state.inputValue = "";
     },
-    CheckboxAction:(state,action)=>{
-      state.IsSelected 
-    }
+    CheckboxAction: (state, action) => {
+      if (action.payload.checked) {
+        const updateTodo = state.todos.map((todo) => {
+          if (todo.id == action.payload.id) {
+            return {
+              ...todo,
+              IsSelected: true,
+            };
+          } else {
+            return todo;
+          }
+        });
+        state.todos = updateTodo;
+      } else {
+        const updateTodo = state.todos.map((todo) => {
+          if (todo.id == action.payload.id) {
+            return {
+              ...todo,
+              IsSelected: false,
+            };
+          } else {
+            return todo;
+          }
+        });
+        state.todos = updateTodo;
+      }
+    },
+    ClearAll: (state) => {
+      state.todos = [];
+    },
   },
 });
 
-export const { addTodo, removeTodo, updateTodo, setInputValue, EditTodo } = todoSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  updateTodo,
+  setInputValue,
+  EditTodo,
+  CheckboxAction,
+  ClearAll,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;
