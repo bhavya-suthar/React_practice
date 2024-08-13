@@ -7,6 +7,7 @@ const initialState = {
     id: null,
   },
   inputValue: "",
+  isLight:false
 };
 
 const todoSlice = createSlice({
@@ -72,6 +73,9 @@ const todoSlice = createSlice({
     ClearAll: (state) => {
       state.todos = [];
     },
+    LightDark:(state)=>{
+      state.isLight = !state.isLight;
+    },
   },
 });
 
@@ -83,6 +87,7 @@ export const {
   EditTodo,
   CheckboxAction,
   ClearAll,
+  LightDark
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

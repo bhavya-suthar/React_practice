@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 } */
+
+
+.dark{
+background:rgb(43, 42, 42);
+color: white;
+}
+
+.light{
+  background-color: white;
+  color: black;
+}
+
+.darkbtn{
+background-color: rgb(11, 114, 248) !important;
+}
