@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import axios from "./axios";
+const API ="https://jsonplaceholder.typicode.com"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [myData, setMyData] = useState([]);
+  console.log("🚀 ~ App ~ myData:", myData);
+  const [isError, setIsError] = useState("");
+  console.log("🚀 ~ App ~ isError:", isError);
+
+  // using Promises
+  // useEffect(() => {
+  //   axios.get("https://jsonplaceholder.typicode.com/posts")
+  //   .then((res) => setMyData(res.data))
+  //   .catch((error) => setIsError(error.message))
+  //  }, []);
+
+  //  using async-await
+
+  const getApiData = async () => {
+    try {
+      const res = await axios.get("/posts");
+      setMyData(res.data);
+    } catch (error) {
+      setIsError(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getApiData();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>AXIOS</h1>
+      {isError !== " " && <h2>{isError}</h2>}
+      <div className="grid">
+        {myData.slice(0, 12).map((post) => {
+          const { id, title, body } = post;
+          return (
+            <div className="cards" key={id}>
+              <h2>{title.slice(0, 15).toUpperCase()}</h2>
+              <p>{body.slice(0, 150)}</p>
+            </div>
+          );
+        })}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
