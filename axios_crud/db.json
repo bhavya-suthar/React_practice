@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "leanna Graham",
+      "username": "Bret",
+      "email": "leanna12@gmail.com",
+      "phone": "2343894098",
+      "website": "hildegard.org"
+    },
+    {
+      "id": 2,
+      "name": "Ervin Howell",
+      "username": "Antonette",
+      "email": "Antonette34@gmail.com",
+      "phone": "6789046378",
+      "website": "Antonette.net"
+    },
+    {
+      "id": 3,
+      "name": "Bhavya Suthar",
+      "username": "bsuthar",
+      "email": "bjsuthar88@gmail.com",
+      "phone": "7869054327",
+      "website": "fashionfusion.com"
+    },
+    {
+      "id": 4,
+      "name": "Darshan Shah",
+      "username": "dshah",
+      "email": "darshan14@gmail.com",
+      "phone": "9076543216",
+      "website": "fruitestore.org"
+    },
+    {
+      "id": 5,
+      "name": "Ananya Patel",
+      "username": "apatel",
+      "email": "ananya@gmail.com",
+      "phone": "9856749034",
+      "website": "itsananya.com"
+    },
+    {
+      "id": 6,
+      "name": "Clementine Bauch",
+      "username": "Samantha",
+      "email": "nathan@gmail.com",
+      "phone": "9865436782",
+      "website": "Clementine.org"
+    },
+    {
+      "id": 7,
+      "name": "Pathicia Labsack",
+      "username": "pathicia",
+      "email": "Labsack@gmail.com",
+      "phone": "7849378290",
+      "website": "pathicia.org"
+    },
+    {
+      "id": 8,
+      "name": "Chelsey Deichr",
+      "username": "Chelsey",
+      "email": "Deichr@gmail.com",
+      "phone": "9876543217",
+      "website": "chelsey.net"
+    },
+    {
+      "id": 9,
+      "name": "Mr.Dennis Graham",
+      "username": "Dennis",
+      "email": "Graham@gmail.com",
+      "phone": "5674893652",
+      "website": "dennis.com"
+    },
+    {
+      "id": 10,
+      "name": "Can devit",
+      "username": "cdevit",
+      "email": "cdevit67@gmail.com",
+      "phone": "7846538902",
+      "website": "fickriharika.com"
+    }
+  ]
+}
