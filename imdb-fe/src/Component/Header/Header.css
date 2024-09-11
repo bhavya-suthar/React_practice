@@ -4,7 +4,7 @@
     align-items: center;
     display: flex;
     justify-content:space-between;
-    background: #3d3c3c;
+    background:rgb(69, 67, 67);
 }
 
 .headerLeft, .headerRight {
