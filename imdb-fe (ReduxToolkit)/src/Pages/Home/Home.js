@@ -13,8 +13,8 @@ import {
 import axios from "axios";
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
-  console.log("🚀 ~ Home ~ popularMovies:", popularMovies);
+  // const [popularMovies, setPopularMovies] = useState([]);
+  // console.log("🚀 ~ Home ~ popularMovies:", popularMovies);
   const dispatch = useDispatch();
   const {data} = useSelector(state => state.movie.allMovies)
   

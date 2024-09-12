@@ -10,26 +10,68 @@ const initialState = {
     loading: false,
     error: null,
   },
+  getType: {
+    data: {},
+    loading: false,
+    error: null,
+  },
 };
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    fetchAllMovieStart:(state,action)=> { 
-        state.allMovies.loading=true
+    fetchAllMovieStart: (state, action) => {
+      state.allMovies.loading = true;
     },
-    fetchAllMovieSuccess:(state,action)=> {
-        state.allMovies.loading = false,
-        state.allMovies.data = action.payload,
-        state.allMovies.error = null
+    fetchAllMovieSuccess: (state, action) => {
+      (state.allMovies.loading = false),
+        (state.allMovies.data = action.payload),
+        (state.allMovies.error = null);
     },
-    fetchAllMovieFailure:(state,action)=> {
-        state.allMovies.loading = false,
-        state.allMovies.error = action.payload
+    fetchAllMovieFailure: (state, action) => {
+      (state.allMovies.loading = false),
+        (state.allMovies.error = action.payload);
+    },
+
+    movieDetailStart: (state, action) => {
+      state.getSingleMovie.loading = true;
+    },
+    movieDetailSuccess: (state, action) => {
+      // debugger
+      state.getSingleMovie.data = action.payload;
+      state.getSingleMovie.loading = false;
+      state.allMovies.error = null;
+    },
+    movieDetailFailure: (state, action) => {
+      (state.getSingleMovie.loading = false),
+        (state.getSingleMovie.error = action.payload);
+    },
+
+    getTypeStart: (state, action) => {
+      state.getType.loading = true;
+    },
+    getTypeSuccess: (state, action) => {
+      state.getType.loading = false;
+      state.getType.data = action.payload
+      state.getType.error= null
+    },
+    getTypeFailure: (state, action) => {
+      state.getType.loading = false;
+      state.getType.error = action.payload
     },
   },
 });
 
-export const {fetchAllMovieStart,fetchAllMovieSuccess,fetchAllMovieFailure} = movieSlice.actions;
+export const {
+  fetchAllMovieStart,
+  fetchAllMovieSuccess,
+  fetchAllMovieFailure,
+  movieDetailStart,
+  movieDetailSuccess,
+  movieDetailFailure,
+  getTypeStart,
+  getTypeSuccess,
+  getTypeFailure
+} = movieSlice.actions;
 export default movieSlice.reducer;
