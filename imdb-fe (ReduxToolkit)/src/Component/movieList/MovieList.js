@@ -46,10 +46,11 @@ const MovieList = () => {
     <div className="movie__list">
       <h2 className="list__title">{(type ? type : "POPULAR").toUpperCase()}</h2>
       <div className="list__cards">
-        {data.map((movie) => (
-          <Card movie={movie} />
-        ))}
-      </div>
+      {Array.isArray(data) && data.length > 0 ? (
+          data.map((movie) => <Card key={movie.id} movie={movie} />)
+        ) : (
+          <p>No movies found.</p>
+        )}</div>
     </div>
   );
 };

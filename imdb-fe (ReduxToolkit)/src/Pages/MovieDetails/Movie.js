@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 
 const Movie = () => {
-    const [currentMovieDetail, setMovie] = useState()
     const { id } = useParams()
    const {data} = useSelector(state=>state.movie.getSingleMovie)
    console.log("🚀 ~ Movie ~ data:", data)
