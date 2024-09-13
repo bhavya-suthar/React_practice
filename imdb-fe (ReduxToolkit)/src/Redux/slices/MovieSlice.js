@@ -60,6 +60,11 @@ const movieSlice = createSlice({
       state.getType.loading = false;
       state.getType.error = action.payload
     },
+    // searchData:(state,action)=>{
+    //   const movieSearch = state.allMovies.data.results.map((ele)=>ele.id === action.payload.id?"done":"error")
+    //   console.log("🚀 ~ movieSearch:", movieSearch)
+    //   state.allMovies.data=movieSearch
+    // }
   },
 });
 
@@ -72,6 +77,7 @@ export const {
   movieDetailFailure,
   getTypeStart,
   getTypeSuccess,
-  getTypeFailure
+  getTypeFailure,
+  searchData
 } = movieSlice.actions;
 export default movieSlice.reducer;

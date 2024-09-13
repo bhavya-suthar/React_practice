@@ -5,3 +5,20 @@
 html, body, #root,.App {
   min-height: 100%;
   }
+  .searchclass{
+    display: flex;
+    gap: 5px;
+  }
+.search{
+  display: flex;
+  width: 170px;
+  border: none;
+  border-radius: 25px;
+}
+.searchBtn{
+  padding: 10px;
+  width: 70px;
+  border-radius: 25px;
+  border: none;
+  background-color: rgb(118, 162, 239);
+}
