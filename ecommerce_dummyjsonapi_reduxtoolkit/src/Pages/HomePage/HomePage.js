@@ -12,6 +12,7 @@ import {
 import Loader from "../../Components/Loader/Loader";
 import { STATUS } from "../../utils/status";
 import { useDispatch, useSelector } from "react-redux";
+import ProductLIst from "../../Components/ProductList/ProductLIst";
 
 const HomePage = () => {
   const dispatch = useDispatch()
@@ -48,6 +49,11 @@ const HomePage = () => {
     }
   }
 
+  let catProductsOne = products.filter(product => product.category === categories[0]);
+  let catProductsTwo = products.filter(product => product.category === categories[1]);
+  let catProductsThree = products.filter(product => product.category === categories[2]);
+  let catProductsFour = products.filter(product => product.category === categories[3]);
+
 
   return (
     <main>
@@ -61,7 +67,31 @@ const HomePage = () => {
               <div className="title-md">
                 <h3>See Our Products</h3>
               </div>
-              {productStatus === STATUS.LOADING ?<Loader/>:<ProductList products = {tempProducts}/>}
+              {productStatus === STATUS.LOADING ?<Loader/>:<ProductLIst products = {tempProducts}/>}
+            </div>
+            <div className="categories-item">
+              <div className="title-md">
+                <h3>{categories[0]}</h3>
+              </div>
+              {productStatus === STATUS.LOADING ? <Loader/>:<ProductLIst products={catProductsOne}/>}
+            </div>
+            <div className="categories-item">
+              <div className="title-md">
+                <h3>{categories[1]}</h3>
+              </div>
+              {productStatus === STATUS.LOADING ? <Loader/>:<ProductLIst products={catProductsTwo}/>}
+            </div>
+            <div className="categories-item">
+              <div className="title-md">
+                <h3>{categories[2]}</h3>
+              </div>
+              {productStatus === STATUS.LOADING ? <Loader/>:<ProductLIst products={catProductsThree}/>}
+            </div>
+            <div className="categories-item">
+              <div className="title-md">
+                <h3>{categories[3]}</h3>
+              </div>
+              {productStatus === STATUS.LOADING ? <Loader/>:<ProductLIst products={catProductsFour}/>}
             </div>
           </div>
         </div>

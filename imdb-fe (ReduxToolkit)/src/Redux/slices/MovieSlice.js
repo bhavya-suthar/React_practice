@@ -60,11 +60,14 @@ const movieSlice = createSlice({
       state.getType.loading = false;
       state.getType.error = action.payload
     },
-    // searchData:(state,action)=>{
-    //   const movieSearch = state.allMovies.data.results.map((ele)=>ele.id === action.payload.id?"done":"error")
-    //   console.log("🚀 ~ movieSearch:", movieSearch)
-    //   state.allMovies.data=movieSearch
-    // }
+    searchData:(state,action)=>{
+      const movieSearch = state.allMovies.data.results.filter((ele)=>ele.id === action.payload.id)
+      console.log("🚀 ~ movieSearch:", movieSearch)
+      if (movieSearch.length > 0) {
+        state.allMovies.data = movieSearch;  // Update the state with search result
+      } else {
+        console.log("No movie found with the provided ID");
+      }    }
   },
 });
 

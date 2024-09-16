@@ -7,20 +7,32 @@ import { searchData } from "../../Redux/slices/MovieSlice";
 
 const Header = () => {
   
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch()
-  // const handleSearch = async()=>{
-  //   try {
-  //     const response = await axios.get('https://api.themoviedb.org/3/search/movie?api_key=3f65d6932f9ebaa0c639a286b34f6531')
-  //     console.log("🚀 ~ handleSearch ~ response:", response)
-  //     dispatch(searchData(response.data))
-  //     navigate("/")
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [search , setSearch] = useState()
+  console.log("🚀 ~ Header ~ search:", search)
+
+  const handleSearch = async()=>{
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${search}&api_key=3f65d6932f9ebaa0c639a286b34f6531`)
+      console.log("🚀 ~ handleSearch ~ response:", response)
+      const movies = response.data.results;
+
+      if (movies.length > 0) {
+        const firstMovieId = movies[0].id;
+
+        dispatch(searchData(response.data));
+        // navigate("/movies");  // Ensure you're navigating to a correct route
+        navigate(`/movie/${firstMovieId}`);  // Redirect to the movie details page
+
+      } else {
+        console.log("No movies found");
+      }
+    } catch (error) {
+      console.log("🚀 ~ handleSearch ~ error:", error)
       
-  //   } catch (error) {
-  //     console.log("🚀 ~ handleSearch ~ error:", error)
-      
-  //   }
-  // }
+    }
+  }
   return (
     <div className="header">
       <div className="headerLeft">
@@ -42,7 +54,8 @@ const Header = () => {
         <Link to="/movies/now_playing" style={{ textDecoration: "none" }}>
           <span>Now Playing</span>
         </Link>
-        {/* <div className="searchclass"><input onChange={(e)=>e.target.value} type="text" className="search"/><button className="searchBtn" onClick={handleSearch}>Search</button></div> */}
+        <div className="searchclass"><input onChange={(e)=>setSearch(e.target.value)} type="text" className="search"/>
+        <button className="searchBtn" onClick={handleSearch}>Search</button></div>
       </div>
     </div>
   );
