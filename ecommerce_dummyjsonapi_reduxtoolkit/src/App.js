@@ -16,7 +16,6 @@ import Footer from "./Components/Footer/Footer";
 
 function App() {
 return(
-  <Provider store={store}>
 
   <BrowserRouter>
   <Header />
@@ -31,7 +30,6 @@ return(
 
   <Footer/>
 </BrowserRouter>
-  </Provider>
 )
 }
 
