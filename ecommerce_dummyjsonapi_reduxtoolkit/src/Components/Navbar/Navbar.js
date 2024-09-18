@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSidebarOn } from "../../store/SidebarSlice";
 import { getAllCategories } from "../../store/CategorySlice";
+import {getAllCarts,getCartItemCount,getCartTotal} from '../../store/CartSlice'
+import CartModel from "../CartModel/CartModel";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
   console.log("🚀 ~ Navbar ~ categories:", categories);
+  const carts = useSelector(getAllCarts)
+  console.log("🚀 ~ Navbar ~ carts:", carts)
+  const itemsCount = useSelector(getCartItemCount)
+  console.log("🚀 ~ Navbar ~ itemsCount:", itemsCount)
+  const [searchTerm ,setSearchTerm] = useState(" ")
+
+  const handleSearchTerm = (e)=>{
+    e.preventDefault()
+    setSearchTerm(e.target.value)
+  }
+
+  useEffect(()=>{dispatch(getCartTotal())},[carts])
+
   return (
     <nav className="navbar">
       <div className="navbar-cnt flex align-center">
@@ -36,9 +51,10 @@ const Navbar = () => {
                 type="text"
                 className="form-control fs-14"
                 placeholder="Search your preferred items here"
+                onChange={(e)=>handleSearchTerm(e)}
               />
               <Link
-                to=""
+                to={`/search/${searchTerm}`}
                 className="text-white search-btn flex align-center justify-center"
               >
                 <i className="fa-solid fa-magnifying-glass"></i>
@@ -59,7 +75,8 @@ const Navbar = () => {
         <div className="navbar-cart flex align-center">
           <Link to="/cart" className="cart-btn">
             <i className="fa-solid fa-cart-shopping"></i>
-            <div className="cart-items-value">0</div>
+            <div className="cart-items-value">{itemsCount}</div>
+            <CartModel carts={carts}/>
           </Link>
         </div>
       </div>

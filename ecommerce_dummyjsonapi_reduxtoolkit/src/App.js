@@ -25,7 +25,7 @@ return(
     <Route path="/product/:id" element={<ProductSinglePage />} />
     <Route path="/category/:category" element={<CategoryProductPage />} />
     <Route path="/cart" element={<Cartpage />} />
-    <Route path="/search/:searchterm" element={<SearchPage />} />
+    <Route path="/search/:searchTerm" element={<SearchPage />} />
   </Routes>
 
   <Footer/>
