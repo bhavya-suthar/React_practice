@@ -21,7 +21,7 @@ const Header = () => {
       if (movies.length > 0) {
         const firstMovieId = movies[0].id;
 
-        dispatch(searchData(response.data));
+        // dispatch(searchData(response.data));
         // navigate("/movies");  // Ensure you're navigating to a correct route
         navigate(`/movie/${firstMovieId}`);  // Redirect to the movie details page
 
@@ -53,6 +53,9 @@ const Header = () => {
         </Link>
         <Link to="/movies/now_playing" style={{ textDecoration: "none" }}>
           <span>Now Playing</span>
+        </Link>
+        <Link to="/tv" style={{ textDecoration: "none" }}>
+          <span>TV</span>
         </Link>
         <div className="searchclass"><input onChange={(e)=>setSearch(e.target.value)} type="text" className="search"/>
         <button className="searchBtn" onClick={handleSearch}>Search</button></div>

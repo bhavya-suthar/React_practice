@@ -4,6 +4,9 @@ import Header from './Component/Header/Header';
 import Home from './Pages/Home/Home';
 import MovieList from './Component/movieList/MovieList';
 import Movie from './Pages/MovieDetails/Movie';
+import TVFile from './Pages/TV/TVFile';
+import TVList from './Component/movieList/TVList';
+import TabCom from './Component/tabs/TabsCom';
 
 function App() {
   return (
@@ -14,6 +17,8 @@ function App() {
           <Route index element={<Home/>}></Route>
           <Route path='movie/:id' element={<Movie/>}></Route>
           <Route path="movies/:type" element={<MovieList />}></Route>
+          {/* <Route path="tv/:type" element={<TVList />}></Route> */}
+          <Route path="/tv" element={<TVFile />}></Route>
           <Route path='/*' element={<h1>Page Not Found</h1>}></Route>
         </Routes>
       </BrowserRouter>

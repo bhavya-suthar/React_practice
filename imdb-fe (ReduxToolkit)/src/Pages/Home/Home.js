@@ -5,39 +5,35 @@ import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import MovieList from "../../Component/movieList/MovieList";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchAllMovieFailure,
-  fetchAllMovieStart,
-  fetchAllMovieSuccess,
-} from "../../Redux/slices/MovieSlice";
+// import {
+//   fetchAllMovieFailure,
+//   fetchAllMovieStart,
+//   fetchAllMovieSuccess,
+// } from "../../Redux/slices/MovieSlice";
 import axios from "axios";
+import { fetchAllMovie } from "../../Redux/Thunk/Thunk";
 
 const Home = () => {
   // const [popularMovies, setPopularMovies] = useState([]);
   // console.log("🚀 ~ Home ~ popularMovies:", popularMovies);
   const dispatch = useDispatch();
   const {data} = useSelector(state => state.movie.allMovies)
+  console.log("🚀 ~ Home ~ data:", data)
   
   useEffect(() => {
-    const fetchData = async () => {
-      dispatch(fetchAllMovieStart());
-      try {
-        const response = await axios.get(
-          "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
-        );
-        dispatch(fetchAllMovieSuccess(response.data));
-      } catch (error) {
-        console.log("🚀 ~ useEffect ~ error:", error);
-        dispatch(fetchAllMovieFailure(error?.response?.data?.message));
-      }
-
-      // fetch(
-      //   "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
-      // )
-      //   .then((res) => res.json())
-      //   .then((data) => setPopularMovies(data.results));
-    };
-    fetchData();
+    dispatch(fetchAllMovie());
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
+    //     );
+    //     dispatch(fetchAllMovieSuccess(response.data));
+    //   } catch (error) {
+    //     console.log("🚀 ~ useEffect ~ error:", error);
+    //     dispatch(fetchAllMovieFailure(error?.response?.data?.message));
+    //   }
+    // };
+    // fetchData();
   }, []);
   const movies = Array.isArray(data) ? data : data?.results || [];
 

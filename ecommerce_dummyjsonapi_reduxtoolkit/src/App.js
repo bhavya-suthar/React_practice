@@ -11,6 +11,7 @@ import CategoryProductPage from './Pages/CategoryProductPage/CategoryProductPage
 import Cartpage from './Pages/CartPage/Cartpage'
 import SearchPage from './Pages/SearchPage/SearchPage'
 import Footer from "./Components/Footer/Footer";
+import Login from "./Pages/Login/Login";
 // import Footer from './Components/Footer/Footer'
 
 
@@ -26,6 +27,7 @@ return(
     <Route path="/category/:category" element={<CategoryProductPage />} />
     <Route path="/cart" element={<Cartpage />} />
     <Route path="/search/:searchTerm" element={<SearchPage />} />
+    <Route path="/login" element={<Login />} />
   </Routes>
 
   <Footer/>

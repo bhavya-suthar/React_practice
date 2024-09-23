@@ -1,0 +1,25 @@
+/* @import 'bootstrap/dist/css/bootstrap.min.css'; */
+
+.form-control{
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    flex-direction: column;
+}
+.form-input{
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.form-btn{
+    width: 100px;
+    margin-top: 10px;
+    margin-bottom: 250px;
+    background-color: orangered;
+    border-radius: 4px;
+}
+
+/* .form-content{
+    border: 1px solid rgb(36, 35, 35);
+} */

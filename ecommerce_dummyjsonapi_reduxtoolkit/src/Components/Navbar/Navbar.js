@@ -4,25 +4,32 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSidebarOn } from "../../store/SidebarSlice";
 import { getAllCategories } from "../../store/CategorySlice";
-import {getAllCarts,getCartItemCount,getCartTotal} from '../../store/CartSlice'
+import {
+  getAllCarts,
+  getCartItemCount,
+  getCartTotal,
+} from "../../store/CartSlice";
 import CartModel from "../CartModel/CartModel";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
   console.log("🚀 ~ Navbar ~ categories:", categories);
-  const carts = useSelector(getAllCarts)
-  console.log("🚀 ~ Navbar ~ carts:", carts)
-  const itemsCount = useSelector(getCartItemCount)
-  console.log("🚀 ~ Navbar ~ itemsCount:", itemsCount)
-  const [searchTerm ,setSearchTerm] = useState(" ")
+  const carts = useSelector(getAllCarts);
+  console.log("🚀 ~ Navbar ~ carts:", carts);
+  const itemsCount = useSelector(getCartItemCount);
+  console.log("🚀 ~ Navbar ~ itemsCount:", itemsCount);
+  const [searchTerm, setSearchTerm] = useState(" ");
 
-  const handleSearchTerm = (e)=>{
-    e.preventDefault()
-    setSearchTerm(e.target.value)
-  }
+  const handleSearchTerm = (e) => {
+    e.preventDefault();
+    // stopPropagation()
+    setSearchTerm(e.target.value);
+  };
 
-  useEffect(()=>{dispatch(getCartTotal())},[carts])
+  useEffect(() => {
+    dispatch(getCartTotal());
+  }, [carts]);
 
   return (
     <nav className="navbar">
@@ -51,7 +58,7 @@ const Navbar = () => {
                 type="text"
                 className="form-control fs-14"
                 placeholder="Search your preferred items here"
-                onChange={(e)=>handleSearchTerm(e)}
+                onChange={(e) => handleSearchTerm(e)}
               />
               <Link
                 to={`/search/${searchTerm}`}
@@ -61,12 +68,17 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
+          <ul className="navbar-nav flex align-center fs-12 fw-4 font-manrope">
             {
               // taking only first 8 categories
               categories.slice(0, 10).map((category, idx) => (
-                <li className='nav-item no-wrap' key = {idx}>
-                  <Link to = {`category/${category}`} className='nav-link text-capitalize'>{category.replace("-", " ")}</Link>
+                <li className="nav-item no-wrap" key={idx}>
+                  <Link
+                    to={`category/${category}`}
+                    className="nav-link text-capitalize"
+                  >
+                    {category.replace("-", " ")}
+                  </Link>
                 </li>
               ))
             }
@@ -76,7 +88,7 @@ const Navbar = () => {
           <Link to="/cart" className="cart-btn">
             <i className="fa-solid fa-cart-shopping"></i>
             <div className="cart-items-value">{itemsCount}</div>
-            <CartModel carts={carts}/>
+            <CartModel carts={carts} />
           </Link>
         </div>
       </div>
