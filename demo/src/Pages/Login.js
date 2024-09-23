@@ -117,6 +117,15 @@ const Login = () => {
               for="exampleCheck1"
               style={{ marginBottom: "10px" }}
             >
+             <Link to={"/fpassword"}>Forgot Password?</Link>
+            </label>
+          </div>
+          <div>
+            <label
+              className="form-check-label"
+              for="exampleCheck1"
+              style={{ marginBottom: "10px" }}
+            >
               Not have any Account? <Link to={"/register"}>SingUp</Link>
             </label>
           </div>

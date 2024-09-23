@@ -11,6 +11,8 @@ import Registration from './Pages/Registration'
 import PrivateRoute from './Route/PrivateRoute';
 import NotFound from './Pages/NotFound';
 import PublicRoute from './Route/PublicRoute';
+import FPassword from './Pages/FPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 function App() {
   return (
@@ -28,7 +30,10 @@ function App() {
       <Route path='/contact' element={<PrivateRoute element={<Contact/>}/>}/>
       <Route path='/faqs' element={<PrivateRoute element={<FAQ/>}/>}/>
       <Route path='/dashboard' element={<PrivateRoute element={<DashBoard/>}/>}/>
+      <Route path='/' element={<PrivateRoute element={<DashBoard/>}/>}/>
       <Route path='/privacypolicy' element={<PrivateRoute element={<Privacy_policy/>}/>}/>
+      <Route path='/fpassword' element={<PublicRoute element={<FPassword/>}/>}/>
+      <Route path='/resetpassword' element={<PublicRoute element={<ResetPassword/>}/>}/>
 
       </Routes>
       
