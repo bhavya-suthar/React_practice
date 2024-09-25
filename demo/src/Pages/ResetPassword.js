@@ -1,79 +1,101 @@
-import React, { useState } from 'react'
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 const ResetPassword = () => {
-  const [password,setPassword] = useState("")
-  console.log("🚀 ~ ResetPassword ~ password:", password)
-  const [conpassword,setConPassword] = useState("")
-  console.log("🚀 ~ ResetPassword ~ conpassword:", conpassword)
-  const handleClick = (e)=>{
-    e.preventDefault()
-    if(password === conpassword){
-      console.log("done")
-    }else{
-      console.log("not done")
-    }
-  }
+  const initialValues = {
+    password: "",
+    conPassword: "",
+  };
+
+  const regScema = Yup.object({
+    password: Yup.string().max(6).required("*Please Create Your Password!!!"),
+    conPassword: Yup.string()
+      .required()
+      .oneOf([Yup.ref("password"), null], "*Password didn't match!!"),
+  });
+
+  const navigate = useNavigate()
+  const { values, errors, touched, handleSubmit, handleBlur, handleChange } =
+    useFormik({
+      initialValues,
+      validationSchema: regScema,
+      onSubmit: (values, actions) => {
+        console.log(values);
+       navigate("/login")
+      },
+    });
+
   return (
     <div>
-    <h1>Reset Password</h1>
-    <form
-      className="container"
-      onSubmit={handleClick}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: "100px",
-      }}
-    >
-      <div
+      <h1>Reset Password</h1>
+      <form
+        className="container"
+        onSubmit={handleSubmit}
         style={{
-          border: "1px solid black",
-          padding: "20px",
-          borderRadius: "10px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "100px",
         }}
       >
         <div
-          className="mb-3"
-          style={{ display: "flex", flexDirection: "column", width: "250px" }}
+          style={{
+            border: "1px solid black",
+            padding: "20px",
+            borderRadius: "10px",
+          }}
         >
-          <label for="exampleInputEmail1" className="form-label">
-             Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-           </div>
-        <div
-          className="mb-3"
-          style={{ display: "flex", flexDirection: "column", width: "250px" }}
-        >
-          <label for="exampleInputPassword1" className="form-label">
-           Confirm Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={conpassword}
-            onChange={(e)=>setConPassword(e.target.value)}
-            className="form-control"
-            id="exampleInputPassword1"
-          />
+          <div
+            className="mb-3"
+            style={{ display: "flex", flexDirection: "column", width: "250px" }}
+          >
+            <label for="exampleInputEmail1" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+            {errors.password && touched.password ? (
+              <p style={{ color: "red" }}>{errors.password}</p>
+            ) : null}
           </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </div>
-    </form>
-  </div>
-  )
-}
+          <div
+            className="mb-3"
+            style={{ display: "flex", flexDirection: "column", width: "250px" }}
+          >
+            <label for="exampleInputPassword1" className="form-label">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              name="conPassword"
+              value={values.conPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="form-control"
+              id="exampleInputPassword1"
+            />
+            {errors.conPassword && touched.conPassword ? (
+              <p style={{ color: "red" }}>{errors.conPassword}</p>
+            ) : null}
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

@@ -3,18 +3,18 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-
 const Login = () => {
   const initialValues = {
     email: "",
     password: "",
   };
+
   const loginSchema = Yup.object({
     email: Yup.string().email().required("Email is Required!!"),
     password: Yup.string().max(6).required("password should be 6 character..."),
   });
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const Email_env = process.env.REACT_APP_EMAIL;
   console.log("🚀 ~ Login ~ Email_env:", Email_env);
   const Password_env = process.env.REACT_APP_PASSWORD;
@@ -26,18 +26,16 @@ const Login = () => {
       validationSchema: loginSchema,
 
       onSubmit: (values, action) => {
-
         if (Email_env === values.email && Password_env === values.password) {
           navigate("/dashboard");
-          localStorage.setItem("isLogged",JSON.stringify(true))
+          localStorage.setItem("isLogged", JSON.stringify(true));
         } else {
-          return null;
+          alert("Enter valid Email & Password!!!")
         }
         console.log("🚀 ~ Login ~ values:", values);
         action.resetForm();
       },
     });
-
 
   return (
     <div>
@@ -100,6 +98,16 @@ const Login = () => {
               <p style={{ color: "red" }}>{errors.password}</p>
             ) : null}
           </div>
+          <div>
+            <label
+              className="form-check-label"
+              for="exampleCheck1"
+              style={{ marginBottom: "10px" }}
+            >
+             <Link to={"/fpassword"}>Forgot Password?</Link>
+            </label>
+          </div>
+          
           <div className="mb-3 form-check">
             <input
               type="checkbox"
@@ -108,16 +116,6 @@ const Login = () => {
             />
             <label className="form-check-label" for="exampleCheck1">
               Check me out
-            </label>
-          </div>
-
-          <div>
-            <label
-              className="form-check-label"
-              for="exampleCheck1"
-              style={{ marginBottom: "10px" }}
-            >
-             <Link to={"/fpassword"}>Forgot Password?</Link>
             </label>
           </div>
           <div>

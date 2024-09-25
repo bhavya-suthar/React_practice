@@ -4,7 +4,7 @@ import Navbar from "../Components/Navbar";
 const FAQ = () => {
   return (
     <div className="container">
-    {/* <Navbar/> */}
+    <Navbar/>
       <h1>FAQs</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
