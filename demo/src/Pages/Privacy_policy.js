@@ -1,12 +1,13 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
+import Privacy_policyy from '../Components/Privacy_policyy'
 
 const Privacy_policy = () => {
   return (
     <div className="container">
     <Navbar/>
-    <h1>Privacy Policy</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolorem doloremque sunt optio quasi earum nostrum inventore aliquid mollitia fuga.</p>
+    <Privacy_policyy/>
+
     </div>
   )
 }

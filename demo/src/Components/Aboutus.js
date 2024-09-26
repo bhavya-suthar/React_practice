@@ -12,7 +12,9 @@ const Aboutus = () => {
         distinctio, mollitia, voluptates molestiae saepe ut nihil! Distinctio
         aliquam temporibus libero expedita corrupti rerum deleniti at similique
         praesentium, alias iste non adipisci iure voluptatem possimus placeat
-        eveniet dignissimos? 
+        eveniet dignissimos? Lorem ipsum dolor sit amet consectetur, adipisicing
+        elit. Eius beatae harum modi incidunt vel quisquam quasi. Odio ut magnam
+        ab.
       </p>
     </>
   );

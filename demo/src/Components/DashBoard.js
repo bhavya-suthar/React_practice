@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 import Aboutus from "./Aboutus";
 import ContactUs from "./ContactUs";
 import Faq from "./Faq";
-import Privacy_policy from "./Privacy_policy";
+import Privacy_policy from "./Privacy_policyy";
 
 const DashBoard = ({setFlag}) => {
   return (
