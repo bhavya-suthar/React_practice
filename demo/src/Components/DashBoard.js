@@ -9,10 +9,10 @@ import ContactUs from "./ContactUs";
 import Faq from "./Faq";
 import Privacy_policy from "./Privacy_policy";
 
-const DashBoard = () => {
+const DashBoard = ({setFlag}) => {
   return (
     <div className="container">
-      <Navbar />
+      <Navbar setFlag={setFlag}/>
       <h1>Dashboard</h1>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.

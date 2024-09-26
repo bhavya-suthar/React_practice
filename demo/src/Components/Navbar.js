@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({setFlag}) => {
   const navigate = useNavigate()
 
   const handleLogout= ()=>{
-    localStorage.setItem("isLogged",JSON.stringify(false))
+    localStorage.setItem("flag",JSON.stringify(false))
     navigate("/")
+    setFlag(false)
   }
   return (
     <>

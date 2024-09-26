@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-const Login = () => {
+const Login = ({setFlag}) => {
   const initialValues = {
     email: "",
     password: "",
@@ -27,8 +27,10 @@ const Login = () => {
 
       onSubmit: (values, action) => {
         if (Email_env === values.email && Password_env === values.password) {
+          // debugger
           navigate("/dashboard");
-          localStorage.setItem("isLogged", JSON.stringify(true));
+          localStorage.setItem("flag", JSON.stringify(true));
+          setFlag(true)
         } else {
           alert("Enter valid Email & Password!!!")
         }
