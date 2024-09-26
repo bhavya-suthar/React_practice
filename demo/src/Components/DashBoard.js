@@ -8,12 +8,15 @@ import Aboutus from "./Aboutus";
 import ContactUs from "./ContactUs";
 import Faq from "./Faq";
 import Privacy_policy from "./Privacy_policyy";
+import { useTranslation } from "react-i18next";
 
 const DashBoard = ({setFlag}) => {
+  const {t} = useTranslation();
+
   return (
     <div className="container">
       <Navbar setFlag={setFlag}/>
-      <h1>Dashboard</h1>
+      <h1>{t('Dashboard')}</h1>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
         Necessitatibus, nihil. Error expedita repellat quisquam repudiandae

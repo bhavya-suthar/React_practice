@@ -14,6 +14,7 @@ import FPassword from "./Pages/FPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import { useState } from "react";
 import { useEffect } from "react";
+// import './i18n'
 
 function App() {
   const [flag, setFlag] = useState(false);
