@@ -1,15 +1,15 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-const Privacy_policy = () => {
+const Privacy_policyy = () => {
   const {t}=useTranslation()
   return (
     <>
 
     <h1>{t('Privacy Policy')}</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia cum nulla, cumque deserunt quae, officia quis, doloremque nobis eum debitis labore tenetur earum. Voluptas corporis possimus laudantium sint voluptatum ut adipisci voluptatibus! Nihil tempore deserunt id quaerat ducimus hic, recusandae libero autem perspiciatis blanditiis consectetur quod, omnis voluptatem error corporis.</p>
+    <p>{t('Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nihil. Error expedita repellat quisquam repudiandae excepturi, veritatis id! Repellat minus sed est obcaecati veritatis unde dolores cumque ut sint numquam possimus eveniet, rem tempore quae adipisci ratione, asperiores voluptatem alias id similique deserunt pariatur explicabo aperiam soluta. Ab dolorum expedita explicabo exercitationem, neque iste architecto! Repudiandae ipsam quaerat veritatis! Exercitationem, voluptatibus eveniet perferendis non adipisci veniam assumenda mollitia? Voluptate voluptates voluptatibus quia esse quo nam autem quas amet labore perspiciatis, laudantium repudiandae, innecessitatibus reprehenderit vitae ea consectetur sapiente assumenda repellendus, corporis hic! Inventore natus commodi in, doloremque velfacere!')}</p>
     </>
   )
 }
 
-export default Privacy_policy
+export default Privacy_policyy

@@ -7,16 +7,7 @@ const Aboutus = () => {
     <>
       <h1>{t('About Us')}</h1>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam
-        dolores voluptatum ullam quam, explicabo aut illo eos. Nobis, modi quod
-        quam exercitationem excepturi quidem qui voluptate atque facere quaerat
-        culpa consequatur sunt quibusdam voluptatem deserunt alias consectetur
-        distinctio, mollitia, voluptates molestiae saepe ut nihil! Distinctio
-        aliquam temporibus libero expedita corrupti rerum deleniti at similique
-        praesentium, alias iste non adipisci iure voluptatem possimus placeat
-        eveniet dignissimos? Lorem ipsum dolor sit amet consectetur, adipisicing
-        elit. Eius beatae harum modi incidunt vel quisquam quasi. Odio ut magnam
-        ab.
+        {t('Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, nihil. Error expedita repellat quisquam repudiandae excepturi, veritatis id! Repellat minus sed est obcaecati veritatis unde dolores cumque ut sint numquam possimus eveniet, rem tempore quae adipisci ratione, asperiores voluptatem alias id similique deserunt pariatur explicabo aperiam soluta. Ab dolorum expedita explicabo exercitationem, neque iste architecto! Repudiandae ipsam quaerat veritatis! Exercitationem, voluptatibus eveniet perferendis non adipisci veniam assumenda mollitia? Voluptate voluptates voluptatibus quia esse quo nam autem quas amet labore perspiciatis, laudantium repudiandae, innecessitatibus reprehenderit vitae ea consectetur sapiente assumenda repellendus, corporis hic! Inventore natus commodi in, doloremque velfacere!')}
       </p>
     </>
   );

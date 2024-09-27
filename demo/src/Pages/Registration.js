@@ -18,7 +18,8 @@ const Registration = () => {
   };
   const registerSchema = Yup.object({
     name: Yup.string().min(2).max(10).required("*User Name is Required!!"),
-    email: Yup.string().email().required("*Email is Required!!"),
+    // email: Yup.string().email().required("*Email is Required!!"),
+    email: Yup.string().matches( /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Invalid email').required("*Email is Required!!"),
     password: Yup.string().max(6).required("*Please Create Your Password..."),
     confirmPassword: Yup.string()
       .required()
@@ -28,7 +29,7 @@ const Registration = () => {
     country: Yup.string().required("*Country is Required"),
     city: Yup.string().required("*City is Required"),
     address: Yup.string().required("*Address Field is Required"),
-    condition: Yup.string().required("You have to agree term and condition!"),
+    condition: Yup.boolean().oneOf([true],"*You have to agree term and condition!"),
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -106,7 +107,7 @@ const Registration = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                 />
-                <span onClick={() => setHideConPassword(!hideConPassword)}>
+                <span style={{position:"absolute",top:"200px",left:"595px"}} onClick={() => setHideConPassword(!hideConPassword)}>
                   {hideConPassword ? (
                     <i class="fa-regular fa-eye"></i>
                   ) : (
@@ -130,7 +131,7 @@ const Registration = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                 />
-                <span onClick={() => setHide(!hide)}>
+                <span style={{position:"absolute",top:"200px",left:"820px"}} onClick={() => setHide(!hide)}>
                   {hide ? (
                     <i class="fa-regular fa-eye"></i>
                   ) : (
@@ -265,7 +266,7 @@ const Registration = () => {
               </label>
             </div>
             {errors.condition && touched.condition ? (
-              <p className="text-danger">{errors.city}</p>
+              <p className="text-danger">{errors.condition}</p>
             ) : null}
             <div className="d-flex justify-content-center align-items-center mt-0">
               <button type="submit" className="btn btn-primary">

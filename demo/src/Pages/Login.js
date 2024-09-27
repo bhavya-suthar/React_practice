@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Login = ({setFlag}) => {
+  const [showPassword,setShowPassword] =useState(false)
   const initialValues = {
     email: "",
     password: "",
@@ -89,14 +90,21 @@ const Login = ({setFlag}) => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword?"text":"password"}
               name="password"
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
               className="form-control"
               id="exampleInputPassword1"
-            />
+            /> <span style={{position:"absolute",top:"225px",right:"530px"}} onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? (
+                    <i class="fa-regular fa-eye"></i>
+                  ) : (
+                    <i class="fa-regular fa-eye-slash"></i>
+                  )}
+                </span>
+               
             {errors.password && touched.password ? (
               <p style={{ color: "red" }}>{errors.password}</p>
             ) : null}

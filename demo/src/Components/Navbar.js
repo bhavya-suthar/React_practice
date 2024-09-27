@@ -77,9 +77,10 @@ const Navbar = ({ setFlag }) => {
                     handleClick(e);
                   }}
                 >
-                  <option value={"en"}>English</option>
-                  <option value={"guj"}>Gujarati</option>
-                  <option value={"hin"}>Hindi</option>
+                  <option>{t('Select Language')}</option>
+                  <option value={"en"}>{t('English')}</option>
+                  <option value={"guj"}>{t('Gujrati')}</option>
+                  <option value={"hin"}>{t('Hindi')}</option>
                 </select>
               </li>
 
@@ -98,11 +99,11 @@ const Navbar = ({ setFlag }) => {
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder={t("Search")}
                 aria-label="Search"
               />
               <button className="btn btn-outline-success" type="submit">
-                Search
+                {t('Search')}
               </button>
               <div style={{ display: "flex", marginLeft: "10px" }}>
                 <button
@@ -110,7 +111,7 @@ const Navbar = ({ setFlag }) => {
                   type="submit"
                   onClick={handleLogout}
                 >
-                  Logout
+                  {t('Logout')}
                 </button>
               </div>
             </form>
