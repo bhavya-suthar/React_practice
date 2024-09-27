@@ -16,14 +16,14 @@ const ResetPassword = () => {
       .oneOf([Yup.ref("password"), null], "*Password didn't match!!"),
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { values, errors, touched, handleSubmit, handleBlur, handleChange } =
     useFormik({
       initialValues,
       validationSchema: regScema,
       onSubmit: (values, actions) => {
         console.log(values);
-       navigate("/login")
+        navigate("/login");
       },
     });
 
@@ -89,9 +89,19 @@ const ResetPassword = () => {
               <p style={{ color: "red" }}>{errors.conPassword}</p>
             ) : null}
           </div>
+          <div className="d-flex gap-2">
+
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
+          <button
+            type="submit"
+            className="btn btn-warning"
+            onClick={() => navigate("/login")}
+          >
+            Cancel
+          </button>
+          </div>
         </div>
       </form>
     </div>

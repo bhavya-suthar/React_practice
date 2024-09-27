@@ -72,9 +72,14 @@ const FPassword = () => {
           }
           
         </div>
+        <div className="d-flex gap-2">
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <button type="submit" className="btn btn-warning" onClick={()=>navigate("/login")}>
+          Cancel
+        </button>
+        </div>
       </div>
     </form>
   </div>    

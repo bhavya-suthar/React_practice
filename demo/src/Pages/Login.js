@@ -41,6 +41,7 @@ const Login = ({setFlag}) => {
 
   return (
     <div>
+      <h1 className="d-flex justify-content-center align-items-center mt-4">Login</h1>
       <form
         onSubmit={handleSubmit}
         className="container"
@@ -49,7 +50,7 @@ const Login = ({setFlag}) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "100px",
+          marginTop: "10px",
         }}
       >
         <div
@@ -120,18 +121,17 @@ const Login = ({setFlag}) => {
               Check me out
             </label>
           </div>
+          <button type="submit" className="btn btn-primary mb-2">
+            Submit
+          </button>
           <div>
             <label
               className="form-check-label"
               for="exampleCheck1"
-              style={{ marginBottom: "10px" }}
-            >
+              >
               Not have any Account? <Link to={"/register"}>SingUp</Link>
             </label>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
         </div>
       </form>
     </div>
