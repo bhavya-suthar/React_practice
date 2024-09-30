@@ -70,9 +70,9 @@ const ResetPassword = () => {
               aria-describedby="emailHelp"
             /><span style={{position:"absolute",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setPassword(!password)}>
                   {password ? (
-                    <i class="fa-regular fa-eye"></i>
-                  ) : (
                     <i class="fa-regular fa-eye-slash"></i>
+                  ) : (
+                    <i class="fa-regular fa-eye"></i>
                   )}
                 </span>
                 </div>
@@ -98,9 +98,9 @@ const ResetPassword = () => {
               id="exampleInputPassword1"
             /><span style={{position:"absolute",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setConfirmPassword(!confirmpassword)}>
                   {confirmpassword ? (
-                    <i class="fa-regular fa-eye"></i>
-                  ) : (
                     <i class="fa-regular fa-eye-slash"></i>
+                  ) : (
+                    <i class="fa-regular fa-eye"></i>
                   )}
                 </span>
                 </div>

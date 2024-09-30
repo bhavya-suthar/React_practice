@@ -56,7 +56,7 @@ const FPassword = () => {
           style={{ display: "flex", flexDirection: "column", width: "250px" }}
         >
           <label for="exampleInputEmail1" className="form-label">
-            Email address
+            Email <span className="text-danger">*</span>
           </label>
           <input
             type="email"

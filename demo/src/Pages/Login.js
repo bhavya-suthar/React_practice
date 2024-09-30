@@ -92,9 +92,9 @@ const Login = ({setFlag}) => {
               id="exampleInputPassword1"
             /> <span style={{position:"absolute",cursor:"pointer",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <i class="fa-regular fa-eye"></i>
-                  ) : (
                     <i class="fa-regular fa-eye-slash"></i>
+                  ) : (
+                    <i class="fa-regular fa-eye"></i>
                   )}
                 </span>
             </div>
