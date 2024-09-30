@@ -55,18 +55,11 @@ const Login = ({setFlag}) => {
         }}
       >
         <div
-          style={{
-            border: "1px solid black",
-            padding: "20px",
-            borderRadius: "10px",
-          }}
-        >
+        className="bg-light border border-1 p-3 rounded-3">
           <div
-            className="mb-3"
-            style={{ display: "flex", flexDirection: "column", width: "250px" }}
-          >
+            className="mb-3 d-flex flex-column w-100">
             <label for="exampleInputEmail1" className="form-label">
-              Email address
+              Email <span className="text-danger">*</span>
             </label>
             <input
               type="email"
@@ -83,12 +76,12 @@ const Login = ({setFlag}) => {
             ) : null}
           </div>
           <div
-            className="mb-3"
-            style={{ display: "flex", flexDirection: "column", width: "250px" }}
+            className="mb-3 d-flex flex-column w-100"
           >
             <label for="exampleInputPassword1" className="form-label">
-              Password
+              Password <span className="text-danger">*</span>
             </label>
+            <div style={{position:"relative" }}>
             <input
               type={showPassword?"text":"password"}
               name="password"
@@ -97,13 +90,14 @@ const Login = ({setFlag}) => {
               onBlur={handleBlur}
               className="form-control"
               id="exampleInputPassword1"
-            /> <span style={{position:"absolute",top:"225px",right:"530px"}} onClick={() => setShowPassword(!showPassword)}>
+            /> <span style={{position:"absolute",cursor:"pointer",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
                     <i class="fa-regular fa-eye"></i>
                   ) : (
                     <i class="fa-regular fa-eye-slash"></i>
                   )}
                 </span>
+            </div>
                
             {errors.password && touched.password ? (
               <p style={{ color: "red" }}>{errors.password}</p>

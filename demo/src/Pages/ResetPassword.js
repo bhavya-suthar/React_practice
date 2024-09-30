@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const ResetPassword = () => {
+  
+  const [password, setPassword] = useState(false);
+  const [confirmpassword, setConfirmPassword] = useState(false);
   const initialValues = {
     password: "",
     conPassword: "",
@@ -55,8 +58,9 @@ const ResetPassword = () => {
             <label for="exampleInputEmail1" className="form-label">
               Password
             </label>
+            <div style={{position:"relative" }}>
             <input
-              type="password"
+               type={password ? "text" : "password"}
               name="password"
               value={values.password}
               onChange={handleChange}
@@ -64,7 +68,14 @@ const ResetPassword = () => {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-            />
+            /><span style={{position:"absolute",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setPassword(!password)}>
+                  {password ? (
+                    <i class="fa-regular fa-eye"></i>
+                  ) : (
+                    <i class="fa-regular fa-eye-slash"></i>
+                  )}
+                </span>
+                </div>
             {errors.password && touched.password ? (
               <p style={{ color: "red" }}>{errors.password}</p>
             ) : null}
@@ -76,15 +87,23 @@ const ResetPassword = () => {
             <label for="exampleInputPassword1" className="form-label">
               Confirm Password
             </label>
+            <div style={{position:"relative" }}>
             <input
-              type="password"
-              name="conPassword"
+               type={confirmpassword ? "text" : "password"}
+               name="conPassword"
               value={values.conPassword}
               onChange={handleChange}
               onBlur={handleBlur}
               className="form-control"
               id="exampleInputPassword1"
-            />
+            /><span style={{position:"absolute",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setConfirmPassword(!confirmpassword)}>
+                  {confirmpassword ? (
+                    <i class="fa-regular fa-eye"></i>
+                  ) : (
+                    <i class="fa-regular fa-eye-slash"></i>
+                  )}
+                </span>
+                </div>
             {errors.conPassword && touched.conPassword ? (
               <p style={{ color: "red" }}>{errors.conPassword}</p>
             ) : null}

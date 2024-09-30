@@ -98,6 +98,7 @@ const Registration = () => {
                 <label for="exampleInputPassword1" className="form-label">
                   Password <span className="text-danger">*</span>
                 </label>
+                <div style={{position:"relative" }}>
                 <input
                   type={hideConPassword ? "text" : "password"}
                   name="password"
@@ -107,13 +108,14 @@ const Registration = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                 />
-                <span style={{position:"absolute",top:"200px",left:"595px"}} onClick={() => setHideConPassword(!hideConPassword)}>
+                <span style={{position:"absolute",top:"20%",right:"10px",transform:"tranlateY(-50%)"}} onClick={() => setHideConPassword(!hideConPassword)}>
                   {hideConPassword ? (
                     <i class="fa-regular fa-eye"></i>
                   ) : (
                     <i class="fa-regular fa-eye-slash"></i>
                   )}
                 </span>
+                </div>
                 {errors.password && touched.password ? (
                   <p className="text-danger w-75">{errors.password}</p>
                 ) : null}
@@ -122,6 +124,7 @@ const Registration = () => {
                 <label for="exampleInputPassword1" className="form-label">
                   Confirm Password <span className="text-danger">*</span>
                 </label>
+                <div style={{position:"relative" }}>
                 <input
                   type={hide ? "text" : "password"}
                   name="confirmPassword"
@@ -131,13 +134,14 @@ const Registration = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                 />
-                <span style={{position:"absolute",top:"200px",left:"820px"}} onClick={() => setHide(!hide)}>
+                <span style={{position:"absolute",top:"50%",right:"10px",transform:"translateY(-50%)"}} onClick={() => setHide(!hide)}>
                   {hide ? (
                     <i class="fa-regular fa-eye"></i>
                   ) : (
                     <i class="fa-regular fa-eye-slash"></i>
                   )}
                 </span>
+                </div>
                 {errors.confirmPassword && touched.confirmPassword ? (
                   <p className="text-danger w-75">{errors.confirmPassword}</p>
                 ) : null}
