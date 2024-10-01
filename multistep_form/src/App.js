@@ -1,16 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import Form1 from './Components/Form1';
-import Form2 from './Components/Form2';
-import Form3 from './Components/Form3';
+import Form from './Components/Form';
+import Form1 from './Components/Step1';
+import Form2 from './Components/Step2';
+import Form3 from './Components/Step3';
 
 function App() {
   return (
     <>
       App
-      <Form1/>
-      <Form2/>
-      <Form3/>
+      <Form/>
     </>
     );
 }
