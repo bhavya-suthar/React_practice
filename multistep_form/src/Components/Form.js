@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import Step2 from "./Step2";
+import Step1 from './Step1'
+import Step3 from './Step3'
+
 
 const registerSchema = Yup.object({
   fname: Yup.string().min(2).max(10).required("*First Name is Required!!"),
@@ -18,7 +19,7 @@ const registerSchema = Yup.object({
   conPassword: Yup.string()
     .required()
     .oneOf([Yup.ref("password"), null], "*Password didn't Match"),
-  gender: Yup.string().required("*Gender Field is Required"),
+gender: Yup.string().required("*Gender Field is Required"),
   // date: Yup.string().required("*Please Select the Date"),
   startDate: Yup.date().nullable().required("*Please Select the Date"),
   country: Yup.string().required("*Country is Required"),
@@ -63,6 +64,8 @@ const renderStep = (
           handleChange={handleChange}
           handleBlur={handleBlur}
           next={next}
+          back={back}
+
         />
       );
     case 3:
@@ -74,6 +77,8 @@ const renderStep = (
           handleChange={handleChange}
           handleBlur={handleBlur}
           next={next}
+          back={back}
+
         />
       );
     default:
@@ -146,6 +151,7 @@ const Form = () => {
           onSubmit={(values, action) => {
             console.log("🚀 ~ Form ~ values:", values);
             action.resetForm();
+            setStep(1); // Reset step to 1 after submission
           }}
         >
           {({
