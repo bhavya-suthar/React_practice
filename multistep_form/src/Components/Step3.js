@@ -2,11 +2,21 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 
 const Step3 = (props) => {
-  const { values, handleChange, handleBlur,handleSubmit, errors, touched, next, back } =
-    props;
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    errors,
+    touched,
+    back,
+  } = props;
+
+  const isButtonDisabled = !values.address || !values.condition;
 
   return (
-    <div className="d-flex flex-column bg-light p-3 border border-1 m-2 rounded-2 w-75 align-items-center justify-content-center">
+    <div className="d-flex flex-column bg-light p-5 w-50 border border-1 m-2 rounded-2  align-items-center justify-content-center">
+      <h1>Form3</h1>
       <div className="mb-3 ">
         <Form.Group>
           <Form.Label>Address</Form.Label>
@@ -24,15 +34,20 @@ const Step3 = (props) => {
       </div>
       <Form.Group className="mb-3">
         <Form.Check
-          required
           label="Agree to terms and conditions"
-          feedback="You must agree before submitting."
-          feedbackType="invalid"
+          name="condition"
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
+        {errors.condition && touched.condition ? (
+          <p className="text-danger w-75">{errors.condition}</p>
+        ) : null}
       </Form.Group>
       <div className="d-flex gap-3">
         <Button onClick={back}>Back</Button>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit} disabled={isButtonDisabled}>
+          Submit
+        </Button>
       </div>
     </div>
   );
