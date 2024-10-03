@@ -19,8 +19,7 @@ const registerSchema = Yup.object({
     .required()
     .oneOf([Yup.ref("password"), null], "*Password didn't Match"),
   gender: Yup.string().required("*Gender Field is Required"),
-  // date: Yup.string().required("*Please Select the Date"),
-  startDate: Yup.date().nullable().required("*Please Select the Date"),
+  date: Yup.string().required("*Please Select the Date"),
   country: Yup.string().required("*Country is Required"),
   city: Yup.string().required("*City is Required"),
   address: Yup.string().required("*Address Field is Required"),
@@ -37,7 +36,7 @@ const Form = () => {
     lname: "",
     email: "",
     password: "",
-    startDate: new Date(),
+    date:"",
     conPassword: "",
     gender: "male",
     country: "",
@@ -76,11 +75,7 @@ const Form = () => {
     <>
       {/* <h2 className="d-flex justify-content-center mt-2">Form</h2> */}
       <div className="bg-light d-flex w-50 p-2 gap-4 m-3 justify-content-around align-items-center">
-        <h5
-          className={`p-3 ${
-            step === 1 ? "bg-primary rounded-4 text-white" : ""
-          }`}
-        >
+        <h5 className={`p-3 ${step === 1 ? "bg-primary rounded-4 text-white" : ""}`} >
           Form1
         </h5>
         <h5
@@ -118,7 +113,7 @@ const Form = () => {
             handleSubmit,
             validateForm,
           }) => (
-            <form onClick={handleSubmit} className="d-flex flex-column justify-content-center align-items-center mt-3">
+            <form className="d-flex flex-column justify-content-center align-items-center mt-3">
               {step === 1 && (
                 <Step1
                   values={values}

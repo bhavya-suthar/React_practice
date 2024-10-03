@@ -29,7 +29,7 @@ const Step1 = (props) => {
 
         <div className="d-flex gap-3 mb-3">
           <Form.Group>
-            <Form.Label>First name</Form.Label>
+            <Form.Label>First name  <span className="text-danger">*</span></Form.Label>
             <Form.Control
               type="text"
               name="fname"
@@ -43,7 +43,7 @@ const Step1 = (props) => {
             ) : null}
           </Form.Group>
           <Form.Group>
-            <Form.Label>Last name</Form.Label>
+            <Form.Label>Last name  <span className="text-danger">*</span></Form.Label>
             <Form.Control
               type="text"
               name="lname"
@@ -59,7 +59,7 @@ const Step1 = (props) => {
         </div>
         <div className="mb-4 w-75">
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Email  <span className="text-danger">*</span></Form.Label>
             <Form.Control
               type="text"
               name="email"

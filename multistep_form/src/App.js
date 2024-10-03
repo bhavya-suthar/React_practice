@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Form from './Components/Form';
 import Form1 from './Components/Step1';
@@ -9,6 +10,8 @@ function App() {
     <>
       
       <Form/>
+      <ToastContainer />
+
     </>
     );
 }

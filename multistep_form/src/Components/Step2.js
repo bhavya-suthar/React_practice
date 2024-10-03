@@ -11,7 +11,7 @@ const Step2 = (props) => {
       <h1>Form2</h1>
       <div className="d-flex gap-3 mb-3">
         <Form.Group>
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Password  <span className="text-danger">*</span></Form.Label>
           {/* <div style={{ position: "relative" }}> */}
           <Form.Control
             type="password"
@@ -42,7 +42,7 @@ const Step2 = (props) => {
           ) : null}
         </Form.Group>
         <Form.Group>
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Confirm Password  <span className="text-danger">*</span></Form.Label>
           <Form.Control
             type="password"
             name="conPassword"
@@ -58,7 +58,7 @@ const Step2 = (props) => {
       </div>
       <Form.Group controlId="validationCustom01" className="w-0">
         <div className="d-flex gap-3">
-          <Form.Label>Gender</Form.Label>
+          <Form.Label>Gender <span className="text-danger">*</span></Form.Label>
           <Form.Check
             type="radio"
             name="gender"
