@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, useFormik } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 // import { Link } from "react-router-dom";
 // import DatePicker from "react-datepicker";
@@ -60,7 +60,6 @@ const Form = () => {
 
   // const [count, setCount] = useState(100);
   const [step, setStep] = useState(1);
-  const [success, setSuccess] = useState(false);
 
   const next = () => {
     setStep((s) => s + 1);
