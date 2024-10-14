@@ -1,10 +1,8 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import {isValidated} from 'react-stepzilla'
 
 const Form_Step1 = ({ values, handleChange, handleBlur, errors }) => {
   console.log("🚀 ~ errors:", errors)
-  isValidated()
   return (
     <div>
       <Form>

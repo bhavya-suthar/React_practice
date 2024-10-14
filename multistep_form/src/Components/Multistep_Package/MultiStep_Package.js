@@ -90,6 +90,8 @@ const MultiStep_Package = () => {
     });
   };
 
+
+
   const handleSubmit = (e, values) => {
     e.preventDefault();
     const validationErrors = validation();
@@ -151,7 +153,10 @@ const MultiStep_Package = () => {
   ];
   return (
     <div className="d-flex justify-content-center w-100">
-      <StepZilla steps={steps} />
+      <StepZilla
+        steps={steps}
+
+      />
     </div>
   );
 };
