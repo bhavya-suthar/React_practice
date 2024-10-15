@@ -44,34 +44,18 @@ const Registration = () => {
     // ),
   });
 
-  const dispatch = useDispatch()
-  // const user = useSelector((state) => state.user.user);
-  // console.log(user);
-  // const addUserHandler = () => {
-  //   // e.preventDefault();
-  //   if (users.values !== "") {
-  //     dispatch(adduser(values));
-  //   }
-  //   // dispatch(setInputValue(""));
-  // };
+  const dispatch = useDispatch();
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
-    initialValues,
-    validationSchema: registerSchema,
-    onSubmit: (values, action) => {
-      console.log("🚀 ~ Registration ~ values:", values);
-    dispatch(adduser(values));
-
-      action.resetForm();
-    },
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues,
+      validationSchema: registerSchema,
+      onSubmit: (values, action) => {
+        console.log("🚀 ~ Registration ~ values:", values);
+        dispatch(adduser(values));
+        action.resetForm();
+      },
+    });
   const [hide, setHide] = useState(false);
   const [hideConPassword, setHideConPassword] = useState(false);
 
@@ -83,8 +67,8 @@ const Registration = () => {
           onSubmit={handleSubmit}
           className="d-flex flex-column justify-content-center align-items-center mt-3"
         >
-        <div className="shadow p-3 mb-5 bg-light rounded">
-          {/* <div className="bg-light border border-1 p-4 rounded-3 mb-3"> */}
+          <div className="shadow p-3 mb-5 bg-light rounded">
+            {/* <div className="bg-light border border-1 p-4 rounded-3 mb-3"> */}
             <div className="d-flex gap-3  justify-content-center">
               <div className="mb-3 d-flex flex-column">
                 <label for="exampleInputEmail1" className="form-label">
@@ -289,7 +273,7 @@ const Registration = () => {
                 className="form-check-label d-flex justify-content-center"
                 for="exampleCheck1"
               >
-                Already have an Account?<Link to={"/"}>login</Link>
+                Already have an Account?<Link to={"/login"}>login</Link>
               </label>
             </div>
           </div>
