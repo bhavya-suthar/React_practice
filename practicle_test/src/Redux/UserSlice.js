@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: [], // List of users
-  currentUser: null, // Store the logged-in user here
+  users: [],
+  currentUser: null,
 };
+console.log("🚀 ~ initialState:", initialState);
 
 const UserSlice = createSlice({
   name: "user",
@@ -23,20 +24,28 @@ const UserSlice = createSlice({
 
       if (existingUser) {
         existingUser.isLoggedIn = true;
-        state.currentUser = existingUser; 
+        state.currentUser = existingUser;
       } else {
         state.currentUser = null;
       }
     },
 
+    forgotPassword: (state, action) => {
+      // debugger;
+      const verifyEmail = state.users.find(
+        (ele) => ele.email === action.payload.email
+      );
+      console.log("🚀 ~ verifyEmail:", JSON.parse(JSON.stringify(verifyEmail))); // Converts proxy to plain object
+    },
     logoutUser: (state) => {
       if (state.currentUser) {
         state.currentUser.isLoggedIn = false;
-        state.currentUser = null; // Reset currentUser
+        state.currentUser = null;
       }
     },
   },
 });
 
-export const { adduser, logginUser, logoutUser } = UserSlice.actions;
+export const { adduser, logginUser, logoutUser, forgotPassword } =
+  UserSlice.actions;
 export default UserSlice.reducer;

@@ -11,22 +11,6 @@ function App() {
   const loggedin = useSelector((state) => state?.user?.currentUser?.isLoggedIn); // Ensure you check the currentUser field
   console.log("🚀 ~ App ~ loggedin:", loggedin)
   return (
-    // <>
-    //   {loggedin  ? (
-    //     <Routes>
-    //       <Route path="/" element={<Dashboard />} />
-    //       <Route path="/dashboard" element={<Dashboard />} />
-    //     </Routes>
-    //   ) : (
-    //     <Routes>
-    //       <Route path="/" element={<Login />} />
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/register" element={<Registration />} />
-    //       <Route path="/forgotpassword" element={<ForgotPassword />} />
-    //       <Route path="/changepassword" element={<ChangePassword />} />
-    //     </Routes>
-    //   )}
-    // </>
     <>
       <Routes>
         {/* {/ If logged in, user can access dashboard /} */}

@@ -7,7 +7,7 @@ import { logginUser } from "../Redux/UserSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [errorMessage, setErrorMessage] = useState("");
 
   const initialValues = {
     email: "",
@@ -37,10 +37,10 @@ const Login = () => {
         dispatch(logginUser(values));
         if (currentUser && currentUser.isLoggedIn) {
           navigate("/dashboard"); // Navigate to dashboard if login successful
+          action.resetForm(); // Reset form after submission
         }else {
           setErrorMessage("Invalid credentials! Please try again."); // Set error message if login fails
         }
-        action.resetForm(); // Reset form after submission
       },
     });
       
@@ -110,8 +110,7 @@ const Login = () => {
                 <p className="text-danger">{errors.password}</p>
               ) : null}
             </div>
-            {errorMessage && <p className="text-danger">{errorMessage}</p>} {/* Show error message if it exists */}
-
+            {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <Link to="/forgotpassword" className="mb-2">
               <span>Forgot Password?</span>
             </Link>
