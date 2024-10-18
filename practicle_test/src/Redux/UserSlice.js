@@ -32,10 +32,14 @@ const UserSlice = createSlice({
 
     forgotPassword: (state, action) => {
       // debugger;
-      const verifyEmail = state.users.find(
-        (ele) => ele.email === action.payload.email
-      );
-      console.log("🚀 ~ verifyEmail:", JSON.parse(JSON.stringify(verifyEmail))); // Converts proxy to plain object
+      // const verifyEmail = state?.users?.find((ele) => ele.email === action?.payload?.email);
+      // console.log("🚀 ~ verifyEmail:", verifyEmail)
+      // console.log("🚀 ~ verifyEmail:", JSON.parse(JSON.stringify(verifyEmail)));
+      const verifyEmail = Array.isArray(state.users)
+        ? state.users.find((ele) => ele.email === action?.payload?.email)
+        : undefined;
+
+      console.log("🚀 ~ verifyEmail:", verifyEmail);
     },
     logoutUser: (state) => {
       if (state.currentUser) {

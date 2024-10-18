@@ -7,8 +7,6 @@ import { forgotPassword } from "../Redux/UserSlice";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  // const checkEmail = useSelector(state => state.user.emailFound)
-  // console.log("🚀 ~ ForgotPassword ~ checkEmail:", checkEmail)
   const initialValues = {
     email: "",
   };
