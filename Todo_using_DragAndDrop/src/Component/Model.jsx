@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, closeExpand, deleteTodo, expandCheck } from "../Redux/TodoSlice";
+import {
+  addTodo,
+  closeExpand,
+  deleteTodo,
+  expandCheck,
+} from "../Redux/TodoSlice";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { RiDraggable } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import Draggable from "react-draggable";
 
 const Model = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
-  const {todos,isExpand} = useSelector((state) => state.todos);
-
+  const { todos, isExpand } = useSelector((state) => state.todos);
 
   // const [expand, setExpand] = useState(false);
   // console.log("🚀 ~ Model ~ expand:", expand);
@@ -23,6 +29,11 @@ const Model = ({ show, setShow }) => {
     console.log("🚀 ~ Model ~ input:", input);
     dispatch(addTodo(input));
     setInput("");
+  };
+
+  const eventLogger = (e, data) => {
+    console.log('Event: ', e);
+    console.log('Data: ', data);
   };
   return (
     <Modal
@@ -38,18 +49,26 @@ const Model = ({ show, setShow }) => {
       <Modal.Body>
         <Form className="mb-3">
           <Form.Group className="d-flex gap-3 align-items-center">
-          {/* border border-2 rounded-2 p-1 */}
+            {/* border border-2 rounded-2 p-1 */}
             <Form.Control
-            className="border-2"
+              className="border-2"
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
 
-            <Button className="bg-success text-white" onClick={handleSubmit} disabled={input === ""}>
+            <Button
+              className="bg-success text-white"
+              onClick={handleSubmit}
+              disabled={input === ""}
+            >
               Save
             </Button>
-            <Button className="bg-danger text-white" onClick={()=>setInput("")} variant="warning">
+            <Button
+              className="bg-danger text-white"
+              onClick={() => setInput("")}
+              variant="warning"
+            >
               Cancel
             </Button>
             {/* </Form.Control> */}
@@ -57,34 +76,49 @@ const Model = ({ show, setShow }) => {
         </Form>
         <div>
           {todos.map((ele) => (
-            <div
-              className=" d-flex justify-content-between flex-column border border-2 p-2 rounded mb-2"
-              key={ele.id}
-            >
-              <h6 className="d-flex justify-content-between">
-                {ele.text}
-                <AiTwotoneDelete
-                  style={{ height: "20px", width: "20px" }}
-                  onClick={()=>dispatch(expandCheck(ele.id))}
-                />
-              </h6>
-              {ele.isExpand && (
-                <div className="mb-0">
-                  <span>Are you sure you want to delete this Task?</span>
-                  <br />
-                  <span>This Task will be permanently lost.</span>
-                  <div className="d-flex justify-content-between">
-                    <Link className="text-success" onClick={()=>dispatch(deleteTodo(ele.id))}>Yes,Delete Task</Link>
-                    <Link
-                      className="text-danger"
-                      onClick={()=>dispatch(closeExpand(ele.id))}
-                    >
-                      No,keep task
-                    </Link>
-                  </div>
+            <>
+              <Draggable axis="y" onDrag={eventLogger}>
+                <div
+                  className=" d-flex justify-content-between flex-column border border-2 p-2 rounded mb-2" 
+                  style={{cursor:"pointer"}}
+                  key={ele.id}
+                >
+                  <h6 className="d-flex justify-content-between m-0">
+                    <div className="d-flex gap-2">
+                      <RiDraggable style={{ width: "25px", height: "25px",display:"flex",alignItems:"center"}} />
+                      {ele.text}
+                    </div>
+                    <div>
+                      <AiTwotoneDelete
+                        style={{ height: "20px", width: "20px" }}
+                        onClick={() => dispatch(expandCheck(ele.id))}
+                      />
+                    </div>
+                  </h6>
+                  {ele.isExpand && (
+                    <div className="m-0">
+                      <span>Are you sure you want to delete this Task?</span>
+                      <br />
+                      <span>This Task will be permanently lost.</span>
+                      <div className="d-flex justify-content-between">
+                        <Link
+                          className="text-success"
+                          onClick={() => dispatch(deleteTodo(ele.id))}
+                        >
+                          Yes,Delete Task
+                        </Link>
+                        <Link
+                          className="text-danger"
+                          onClick={() => dispatch(closeExpand(ele.id))}
+                        >
+                          No,keep task
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </Draggable>
+            </>
           ))}
         </div>
       </Modal.Body>
