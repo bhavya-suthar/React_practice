@@ -6,17 +6,19 @@ import {
   closeExpand,
   deleteTodo,
   expandCheck,
+  reorderTodo,
 } from "../Redux/TodoSlice";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { RiDraggable } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import Draggable from "react-draggable";
+import DragListView from 'react-drag-listview'
 
 const Model = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const { todos, isExpand } = useSelector((state) => state.todos);
+  
 
   // const [expand, setExpand] = useState(false);
   // console.log("🚀 ~ Model ~ expand:", expand);
@@ -32,9 +34,16 @@ const Model = ({ show, setShow }) => {
   };
 
   const eventLogger = (e, data) => {
-    console.log('Event: ', e);
-    console.log('Data: ', data);
+    console.log("Event: ", e);
+    console.log("Data: ", data);
   };
+
+  const onDragEnd = (fromIndex, toIndex) => {
+    if (toIndex < 0 || toIndex >= todos.length) return; // Prevent out-of-bounds dragging
+    dispatch(reorderTodo({ startIndex: fromIndex, endIndex: toIndex }));
+  };
+
+
   return (
     <Modal
       show={show}
@@ -74,18 +83,33 @@ const Model = ({ show, setShow }) => {
             {/* </Form.Control> */}
           </Form.Group>
         </Form>
+        <DragListView
+              onDragEnd={onDragEnd}
+              nodeSelector="div.todo-item"
+              handleSelector="h6"
+                // axis="y"
+                // onDrag={eventLogger}
+                // onStop={(e, data) => handleDrag(e, data, index)}
+              >
         <div>
-          {todos.map((ele) => (
+          {todos.map((ele, index) => (
             <>
-              <Draggable axis="y" onDrag={eventLogger}>
+              
                 <div
-                  className=" d-flex justify-content-between flex-column border border-2 p-2 rounded mb-2" 
-                  style={{cursor:"pointer"}}
+                  className="todo-item d-flex justify-content-between flex-column border border-2 p-2 rounded mb-2"
+                  style={{ cursor: "pointer" }}
                   key={ele.id}
                 >
                   <h6 className="d-flex justify-content-between m-0">
                     <div className="d-flex gap-2">
-                      <RiDraggable style={{ width: "25px", height: "25px",display:"flex",alignItems:"center"}} />
+                      <RiDraggable
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      />
                       {ele.text}
                     </div>
                     <div>
@@ -117,11 +141,11 @@ const Model = ({ show, setShow }) => {
                     </div>
                   )}
                 </div>
-              </Draggable>
             </>
           ))}
         </div>
-      </Modal.Body>
+      </DragListView>
+    </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
