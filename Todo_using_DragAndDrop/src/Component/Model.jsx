@@ -11,14 +11,13 @@ import {
 import { AiTwotoneDelete } from "react-icons/ai";
 import { RiDraggable } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import DragListView from 'react-drag-listview'
+import DragListView from "react-drag-listview";
 
 const Model = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const { todos, isExpand } = useSelector((state) => state.todos);
-  
 
   // const [expand, setExpand] = useState(false);
   // console.log("🚀 ~ Model ~ expand:", expand);
@@ -33,16 +32,10 @@ const Model = ({ show, setShow }) => {
     setInput("");
   };
 
-  const eventLogger = (e, data) => {
-    console.log("Event: ", e);
-    console.log("Data: ", data);
-  };
-
   const onDragEnd = (fromIndex, toIndex) => {
     if (toIndex < 0 || toIndex >= todos.length) return; // Prevent out-of-bounds dragging
     dispatch(reorderTodo({ startIndex: fromIndex, endIndex: toIndex }));
   };
-
 
   return (
     <Modal
@@ -84,17 +77,16 @@ const Model = ({ show, setShow }) => {
           </Form.Group>
         </Form>
         <DragListView
-              onDragEnd={onDragEnd}
-              nodeSelector="div.todo-item"
-              handleSelector="h6"
-                // axis="y"
-                // onDrag={eventLogger}
-                // onStop={(e, data) => handleDrag(e, data, index)}
-              >
-        <div>
-          {todos.map((ele, index) => (
-            <>
-              
+          onDragEnd={onDragEnd}
+          nodeSelector="div.todo-item"
+          handleSelector="h6"
+          // axis="y"
+          // onDrag={eventLogger}
+          // onStop={(e, data) => handleDrag(e, data, index)}
+        >
+          <div>
+            {todos.map((ele) => (
+              <>
                 <div
                   className="todo-item d-flex justify-content-between flex-column border border-2 p-2 rounded mb-2"
                   style={{ cursor: "pointer" }}
@@ -141,11 +133,11 @@ const Model = ({ show, setShow }) => {
                     </div>
                   )}
                 </div>
-            </>
-          ))}
-        </div>
-      </DragListView>
-    </Modal.Body>
+              </>
+            ))}
+          </div>
+        </DragListView>
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
