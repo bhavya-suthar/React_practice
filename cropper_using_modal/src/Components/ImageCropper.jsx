@@ -8,20 +8,22 @@ const ImageCropper = ({
   handleClose,
   handleShow,
   image,
-  onCropDone,onCropCancel
+  onCropDone,
+  onCropCancel,
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [cropShape, setCropShape] = useState("square");
   const [croppedArea, setCroppedArea] = useState(null);
+  console.log("🚀 ~ croppedArea:", croppedArea)
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixel) => {
     setCroppedArea(croppedAreaPixel);
   };
 
-  const handleRadioChange =(e)=>{
-    setCropShape(e.target.value)
-  }
+  const handleRadioChange = (e) => {
+    setCropShape(e.target.value);
+  };
   return (
     <>
       <Modal
@@ -36,7 +38,7 @@ const ImageCropper = ({
             Edit Image
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{height:"230px"}}>
+        <Modal.Body style={{ height: "230px" }}>
           {/* {image && <img src={image} alt="Selected" style={{ maxWidth: "100%" }} />} */}
           <Cropper
             image={image}
@@ -49,33 +51,58 @@ const ImageCropper = ({
             onCropComplete={onCropComplete}
             cropShape={cropShape}
             style={{
-              containerStyle:{
-                width:"250px",
-                height:"250px",
-                margin:"10px 10px 10px 130px"
-               }
+              containerStyle: {
+                width: "250px",
+                height: "250px",
+                margin: "10px 10px 10px 130px",
+              },
             }}
           />
         </Modal.Body>
-            <div className="container d-flex gap-3 p-3 mt-5">
-              <div className="d-flex gap-2">
-                <input type="radio" name="shap" value="square" checked={cropShape === "square"} onChange={handleRadioChange}/><label>Square</label>
-              </div>
-              <div className="d-flex gap-2">
-                <input type="radio" name="shap" value="round" checked={cropShape === "round"} onChange={handleRadioChange}/><label>Round</label>
-
-              </div>
-            </div>
+        <div className="container d-flex gap-3 p-3 mt-5">
+          <div className="d-flex gap-2">
+            <input
+              type="radio"
+              name="shap"
+              value="square"
+              checked={cropShape === "square"}
+              onChange={handleRadioChange}
+            />
+            <label>Square</label>
+          </div>
+          <div className="d-flex gap-2">
+            <input
+              type="radio"
+              name="shap"
+              value="round"
+              checked={cropShape === "round"}
+              onChange={handleRadioChange}
+            />
+            <label>Round</label>
+          </div>
+        </div>
         <Modal.Footer>
-            <div className="container d-flex gap-3 justify-content-end">
-              <button className="btn-primary rounded-2 border-0 p-2 text-black" onClick={()=>{
+          <div className="container d-flex gap-3 justify-content-end">
+            <button
+              className="btn-primary rounded-2 border-0 p-2 text-black"
+              onClick={() => {
                 onCropDone(croppedArea);
-                setCropShape(cropShape)
-                handleClose()
-                document.getElementById('addpicture').value=""
-              }}>Upload Image</button>
-              <button className="btn-primary rounded-2 border-0 p-2 text-black" onClick={onCropCancel}>Cancel</button>
-            </div>
+                setCropShape(cropShape);
+                handleClose();
+                document.getElementById("addpicture").value = "";
+              }}
+            >
+              Upload Image
+            </button>
+            <button
+              className="btn-primary rounded-2 border-0 p-2 text-black"
+              onClick={() => {
+                onCropCancel(), handleClose();
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>
