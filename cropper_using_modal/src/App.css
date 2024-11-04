@@ -42,16 +42,17 @@
 } */
 
 .imgWrapper{
-  width: 20%;
+  width: 200px;
   height: 95%;
   border-radius: 50%;
   border: 1px solid black;
+  position: relative;
 }
 .spanCamera{
   position: absolute;
   background-color: coral;
   border-radius: 25px;
-  margin-top: 12%;
+  margin-top: 50%;
   margin-left: -45px;
 }
 .btn-primary{

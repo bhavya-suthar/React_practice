@@ -6,7 +6,7 @@ const ReactImageCrop = () => {
   const [showModal, setShowModal] = useState(false);
   const [image, setImage] = useState("");
   console.log("🚀 ~ ReactImageCrop ~ image:", image);
-  const { ImgAfterCrop, setImgAfterCrop } = useState("");
+  const [ ImgAfterCrop, setImgAfterCrop ] = useState("");
 
   const onImageSelected = (selectedImage) => {
     setImage(selectedImage);
@@ -43,6 +43,7 @@ const ReactImageCrop = () => {
       );
 
       const dataURL = canvasEle.toDataURL("image/jpeg");
+      console.log("🚀 ~ onCropDone ~ dataURL:", dataURL)
       setImgAfterCrop(dataURL);
     };
   };

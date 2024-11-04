@@ -69,7 +69,7 @@ const ImageCropper = ({
         <Modal.Footer>
             <div className="container d-flex gap-3 justify-content-end">
               <button className="btn-primary rounded-2 border-0 p-2 text-black" onClick={()=>{
-                onCropDone();
+                onCropDone(croppedArea);
                 setCropShape(cropShape)
                 handleClose()
                 document.getElementById('addpicture').value=""
