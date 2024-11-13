@@ -1,35 +1,97 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import DataTable from "react-data-table-component";
+import { data } from "./data.js";
+import "./App.css";
+
+const customStyles = {
+  rows: {
+    style: {
+      minHeight: "40px", // override the row height
+      border:"1px solid black",
+      fontSize:"14px",
+      backgroundColor:"lightviolate",
+
+    },
+  },
+  
+  headCells: {
+    style: {
+      padding:"5px",
+      border:"1px solid black",
+      color:"blueviolet",
+      fontSize:"20px",
+
+    },
+  },
+  cells: {
+    style: {
+      paddingLeft: "8px", // override the cell padding for data cells
+      paddingRight: "8px",
+      borderRightStyle:"solid",
+      borderRightWidth:"1px"
+    },
+  },
+};
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const columns = [
+    {
+      name: "Title",
+      selector: (row) => row.title,
+    },
+    {
+      name: "Price",
+      selector: (row) => row.price,
+    },
+    {
+      name: "Description",
+      selector: (row) => row.description,
+    },
+    {
+      name:"Categories",
+      selector:row =>row.category
+    }
+  ];
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <h2 style={{ display: "flex", justifyContent: "center" }}>
+        All Products
+      </h2>
+      <div className="search">
+        <input
+          type="text"
+          name=""
+          id=""
+          style={{
+            padding: "5px",
+            borderRadius: "3px",
+            border: "1px solid black",
+          }}
+        />
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "blueviolet",
+            borderRadius: "5px",
+            color: "white",
+          }}
+        >
+          Search
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <DataTable
+        data={data}
+        columns={columns}
+        selectableRows
+        customStyles={customStyles}
+        // pagination
+        fixedHeader="true"
+        fixedHeaderScrollHeight="500px"
+          
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
