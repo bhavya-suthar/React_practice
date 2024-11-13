@@ -85,9 +85,9 @@ function App() {
         columns={columns}
         selectableRows
         customStyles={customStyles}
-        // pagination
-        fixedHeader="true"
-        fixedHeaderScrollHeight="500px"
+        pagination
+        // fixedHeader="true" 
+        // fixedHeaderScrollHeight="500px"
           
       />
     </>
