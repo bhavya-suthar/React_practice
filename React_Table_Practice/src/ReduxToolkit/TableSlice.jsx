@@ -1,13 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit"
+import {data} from '../data'
 
 const initialState ={
-    data:[]
+    product:data,
+    filteredProduct:null
 }
+console.log("🚀 ~ initialState.product:", initialState.product)
 
 const TableSlice = createSlice({
     name:"react_table",
     initialState,
-    reducers:{}
+    reducers:{
+        filteredSearch:(state,action)=>{
+            // const filteredData = data.filter((item) => action.payload === item.title);
+            const filteredData = state.product.filter((item) => action.payload.toLowerCase().includes(item.title.toLowerCase()));
+            console.log("🚀 ~ filteredData:", filteredData)
+            state.filteredProduct = filteredData.length > 0 ?filteredData :null
+        },
+        resetSearch:(state,action)=>{
+            state.filteredProduct = null
+        }
+    }
 })
 
+export const {filteredSearch,resetSearch} = TableSlice.actions
 export default TableSlice.reducer
