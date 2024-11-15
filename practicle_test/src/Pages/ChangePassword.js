@@ -1,7 +1,9 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup'
+import { changePassword } from '../Redux/UserSlice';
 
 const ChangePassword = () => {
     const [password, setPassword] = useState(false);
@@ -18,6 +20,9 @@ const ChangePassword = () => {
       .oneOf([Yup.ref("password"), null], "*Password didn't match!!"),
   });
 
+  const dispatch = useDispatch()
+  const { verifiedUserEmail } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const { values, errors, touched, handleSubmit, handleBlur, handleChange } =
     useFormik({
@@ -25,7 +30,12 @@ const ChangePassword = () => {
       validationSchema: regScema,
       onSubmit: (values, actions) => {
         console.log(values);
-        navigate("/");
+        if(verifiedUserEmail){
+
+          dispatch(changePassword({newPass:values.password,email:verifiedUserEmail}));
+          navigate("/");
+
+        }
       },
     });
   return (

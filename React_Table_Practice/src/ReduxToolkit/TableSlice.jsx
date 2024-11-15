@@ -3,7 +3,8 @@ import {data} from '../data'
 
 const initialState ={
     product:data,
-    filteredProduct:null
+    filteredProduct:null,
+
 }
 console.log("🚀 ~ initialState.product:", initialState.product)
 
@@ -13,7 +14,7 @@ const TableSlice = createSlice({
     reducers:{
         filteredSearch:(state,action)=>{
             // const filteredData = data.filter((item) => action.payload === item.title);
-            const filteredData = state.product.filter((item) => action.payload.toLowerCase().includes(item.title.toLowerCase()));
+            const filteredData = state.product.filter((item) => item.title.toLowerCase().includes(action.payload.toLowerCase()));
             console.log("🚀 ~ filteredData:", filteredData)
             state.filteredProduct = filteredData.length > 0 ?filteredData :null
         },

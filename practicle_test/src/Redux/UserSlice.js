@@ -32,14 +32,19 @@ const UserSlice = createSlice({
 
     forgotPassword: (state, action) => {
       // debugger;
-      // const verifyEmail = state?.users?.find((ele) => ele.email === action?.payload?.email);
-      // console.log("🚀 ~ verifyEmail:", verifyEmail)
-      // console.log("🚀 ~ verifyEmail:", JSON.parse(JSON.stringify(verifyEmail)));
-      const verifyEmail = Array.isArray(state.users)
-        ? state.users.find((ele) => ele.email === action?.payload?.email)
-        : undefined;
+      const verifyEmail = state?.users?.find((ele) => ele.email === action?.payload?.email);
+      console.log("🚀 ~ verifyEmail:", verifyEmail)
+      console.log("🚀 ~ verifyEmail:", JSON.parse(JSON.stringify(verifyEmail)));
+      // const verifyEmail = Array.isArray(state.users)
+      //   ? state.users.find((ele) => ele.email === action?.payload?.email)
+      //   : undefined;
 
       console.log("🚀 ~ verifyEmail:", verifyEmail);
+      if (verifyEmail) {
+        state.verifiedUserEmail = verifyEmail.email; // Store the verified email
+      } else {
+        state.verifiedUserEmail = "";
+      }
     },
     logoutUser: (state) => {
       if (state.currentUser) {
@@ -47,9 +52,22 @@ const UserSlice = createSlice({
         state.currentUser = null;
       }
     },
+    changePassword:(state,action)=>{
+      const { newPass, email } = action.payload;
+
+      state.users = state.users.map((user) => {
+        if (user.email === email) {
+          return { ...user, password: newPass ,confirmPassword:newPass};
+        }
+        return user;
+      });
+
+      // Clear the verified email after password change
+      state.verifiedUserEmail = "";
+    }
   },
 });
 
-export const { adduser, logginUser, logoutUser, forgotPassword } =
+export const { adduser, logginUser, logoutUser, forgotPassword,changePassword } =
   UserSlice.actions;
 export default UserSlice.reducer;

@@ -37,25 +37,38 @@ function App() {
   const [search, setSearch] = useState("");
   console.log("🚀 ~ App ~ search:", search);
 
+  const [suggestion, setSuggestion] = useState([]);
+  console.log("🚀 ~ App ~ suggestion:", suggestion);
+  const { product, filteredProduct } = useSelector((state) => state.table);
+  console.log("🚀 ~ App ~ filteredProduct:", filteredProduct);
+  console.log("🚀 ~ App ~ product:", product);
+
   const handleSearchChange = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     setSearch(value);
 
-    if(value === ""){
-      dispatch(resetSearch())
-    }else{
-      dispatch(filteredSearch(search))
+    if (value === "") {
+      dispatch(resetSearch());
+      setSuggestion([]);
+    } else {
+      const matchedSuggestions = product
+        .map((item) => item.title)
+        .filter((title) => title.toLowerCase().includes(value.toLowerCase()));
+      setSuggestion(matchedSuggestions);
+      // dispatch(filteredSearch(search));
     }
   };
 
   const dispatch = useDispatch();
 
-  const { product, filteredProduct } = useSelector((state) => state.table);
-  console.log("🚀 ~ App ~ filteredProduct:", filteredProduct);
-  console.log("🚀 ~ App ~ product:", product);
-
   const handleSearch = () => {
     dispatch(filteredSearch(search));
+    setSuggestion([]);
+  };
+  const handleSuggestionClick = (suggestion) => {
+    setSearch(suggestion);
+    dispatch(filteredSearch(suggestion));
+    setSuggestion([]);
   };
 
   const columns = [
@@ -135,14 +148,53 @@ function App() {
           // fixedHeaderScrollHeight="500px"
         />
       )}*/}
-
+      {suggestion.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            // alignItems: " center",
+            marginLeft:"390px"
+          }}
+        >
+          <ul
+            style={{
+              listStyleType: "none",
+              padding: "6px",
+              margin:"0",
+              marginBottom: "20px",
+              maxHeight: "150px",
+              overflowY: "auto",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              width: "250px",
+              backgroundColor: "white",
+              cursor:"pointer"
+            }}
+          >
+            {suggestion.map((suggestion, index) => (
+              <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
+                {suggestion}
+              </li>
+            ))}
+          </ul>{" "}
+        </div>
+      )}
       <DataTable
-        // data={filteredProduct && filteredProduct.length > 0 ? filteredProduct : search ? [] : product;}
         data={
           filteredProduct && filteredProduct.length > 0
             ? filteredProduct
-            : product 
+            : search
+            ? []
+            : product
         }
+        // data={
+        //   filteredProduct && filteredProduct.length > 0
+        //     ? filteredProduct
+        //     : product
+        // }
+        // data={filteredProduct !== null ? filteredProduct : product}
         columns={columns}
         selectableRows
         customStyles={customStyles}

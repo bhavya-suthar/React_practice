@@ -24,8 +24,11 @@ const ForgotPassword = () => {
 
       onSubmit: (values, action) => {
         // debugger
-       dispatch(forgotPassword(values));
-        // navigate("/changepassword")
+       const pass =dispatch(forgotPassword(values));
+       if(pass){
+
+         navigate("/changepassword")
+       }
       },
     });
 
@@ -74,7 +77,7 @@ const ForgotPassword = () => {
             ) : null}
           </div>
           <div className="d-flex gap-2">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" >
               Submit
             </button>
             <button
