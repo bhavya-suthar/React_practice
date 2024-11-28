@@ -53,6 +53,80 @@ function App() {
     [todos]
   );
 
+  // const sortingAtoZ = () => {
+  //   const updatedTodoAtoZ = [...todos]
+  //   debugger
+  //   console.log("🚀 ~ sortingAtoZ ~ updatedTodoAtoZ:", updatedTodoAtoZ)
+  //   updatedTodoAtoZ.sort((a, b) => {
+  //     if (a.text.toLowerCase() < b.text.toLowerCase()) {
+  //       console.log("if part A to Z");
+
+  //       return -1;
+  //     } else {
+  //       console.log("else part A to Z");
+
+  //       return 1;
+  //     }
+  //   });
+  //   setTodos(updatedTodoAtoZ)
+  // };
+
+  const soringAtoZUseMemo = useCallback(() => {
+    const updatedTodoAtoZ = [...todos];
+    // debugger
+    console.log("🚀 ~ sortingAtoZ ~ updatedTodoAtoZ:", updatedTodoAtoZ);
+    updatedTodoAtoZ.sort((a, b) => {
+      if (a.text.toLowerCase() < b.text.toLowerCase()) {
+        console.log("if part A to Z");
+
+        return -1;
+      } else {
+        console.log("else part A to Z");
+
+        return 1;
+      }
+    });
+    setTodos(updatedTodoAtoZ);
+  }, [todos]);
+
+  // const sortingZtoA = () => {
+  //   debugger;
+  //   const UpdatedtodoZtoA = [...todos];
+  //   console.log("🚀 ~ sortingZtoA ~ UpdatedtodoZtoA:", UpdatedtodoZtoA);
+
+  //   UpdatedtodoZtoA.sort((a, b) => {
+  //     if (a.text.toLowerCase() > b.text.toLowerCase()) {
+  //       console.log("if part Z to A");
+
+  //       return -1;
+  //     } else {
+  //       console.log("else part Z to A");
+
+  //       return 1;
+  //     }
+  //   });
+  //   setTodos(UpdatedtodoZtoA);
+  // };
+
+  const sortingZtoAUseMemo = useCallback(() => {
+    // debugger
+    const UpdatedtodoZtoA = [...todos];
+    console.log("🚀 ~ sortingZtoA ~ UpdatedtodoZtoA:", UpdatedtodoZtoA);
+
+    UpdatedtodoZtoA.sort((a, b) => {
+      if (a.text.toLowerCase() > b.text.toLowerCase()) {
+        console.log("if part Z to A");
+
+        return -1;
+      } else {
+        console.log("else part Z to A");
+
+        return 1;
+      }
+    });
+    setTodos(UpdatedtodoZtoA);
+  }, [todos]);
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -87,9 +161,23 @@ function App() {
         >
           Add
         </button>
-        <div style={{display:"flex",gap:"10px"}}>
-          <FcAlphabeticalSortingAz style={{fontSize:"35px",backgroundColor:"darkred",borderRadius:"5px"}}/>
-          <FcAlphabeticalSortingZa style={{fontSize:"35px",backgroundColor:"darkred",borderRadius:"5px"}}/>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <FcAlphabeticalSortingAz
+            style={{
+              fontSize: "35px",
+              backgroundColor: "darkred",
+              borderRadius: "5px",
+            }}
+            onClick={soringAtoZUseMemo}
+          />
+          <FcAlphabeticalSortingZa
+            style={{
+              fontSize: "35px",
+              backgroundColor: "darkred",
+              borderRadius: "5px",
+            }}
+            onClick={sortingZtoAUseMemo}
+          />
         </div>
       </div>
 
