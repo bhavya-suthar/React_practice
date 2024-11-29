@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
 import { useCallback } from "react";
-import { FaFilter } from "react-icons/fa";
+// import { FaFilter } from "react-icons/fa";
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
@@ -20,7 +20,7 @@ function App() {
     // );
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
-  // console.log("🚀 ~ App ~ todos:", todos);
+  console.log("🚀 ~ App ~ todos:", todos);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -71,24 +71,39 @@ function App() {
   //   setTodos(updatedTodoAtoZ)
   // };
 
-  const soringAtoZUseMemo = useCallback(() => {
-    const updatedTodoAtoZ = [...todos];
-    // debugger
-    console.log("🚀 ~ sortingAtoZ ~ updatedTodoAtoZ:", updatedTodoAtoZ);
-    updatedTodoAtoZ.sort((a, b) => {
-      if (a.text.toLowerCase() < b.text.toLowerCase()) {
-        console.log("if part A to Z");
+  // const sortingAtoZuseCallback = useCallback(() => {
+  //   const updatedTodoAtoZ = [...todos];
+  //   debugger
+  //   console.log("🚀 ~ sortingAtoZ ~ updatedTodoAtoZ:", updatedTodoAtoZ);
+  //   updatedTodoAtoZ.sort((a, b) => {
+  //     if (a.text.toLowerCase() < b.text.toLowerCase()) {
+  //       console.log("if part A to Z");
 
-        return -1;
+  //       return -1;
+  //     } else {
+  //       console.log("else part A to Z");
+
+  //       return 1;
+  //     }
+  //   });
+  //   setTodos(updatedTodoAtoZ);
+  // }, [todos]);
+
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  const sortedTodods = useMemo(() => {
+    return [...todos].sort((a, b) => {
+      if (sortOrder == "asc") {
+        return a.text.localeCompare(b.text); // A-Z
       } else {
-        console.log("else part A to Z");
-
-        return 1;
+        return b.text.localeCompare(a.text); // Z-A
       }
     });
-    setTodos(updatedTodoAtoZ);
-  }, [todos]);
+  }, [todos, sortOrder]);
 
+  const toggleSorted = () => {
+    setSortOrder((prev) => (prev == "asc" ? "desc" : "asc"));
+  };
   // const sortingZtoA = () => {
   //   debugger;
   //   const UpdatedtodoZtoA = [...todos];
@@ -108,24 +123,29 @@ function App() {
   //   setTodos(UpdatedtodoZtoA);
   // };
 
-  const sortingZtoAUseMemo = useCallback(() => {
-    // debugger
-    const UpdatedtodoZtoA = [...todos];
-    console.log("🚀 ~ sortingZtoA ~ UpdatedtodoZtoA:", UpdatedtodoZtoA);
+  const [Search, setSearch] = useState();
+  console.log("🚀 ~ App ~ Search:", Search);
 
-    UpdatedtodoZtoA.sort((a, b) => {
-      if (a.text.toLowerCase() > b.text.toLowerCase()) {
-        console.log("if part Z to A");
+  // const handleSearch = () => {
+  //   console.log("search==", Search);
 
-        return -1;
-      } else {
-        console.log("else part Z to A");
+  //   const filterdValue = sortedTodods.find((todo) => todo.text == Search);
+  //   console.log("🚀 ~ handleSearch ~ filterdValue:", filterdValue);
+  //   setSearch(filterdValue.text);
+  // };
 
-        return 1;
-      }
-    });
-    setTodos(UpdatedtodoZtoA);
-  }, [todos]);
+  // const filteredTodo = useMemo(()=>{
+  //   return sortedTodods.filter((todo)=>{
+  //     todo.text.toLowerCase().includes(Search?.toLowerCase())
+  //   })
+  // },[sortedTodods,Search])
+
+  const filteredTodo = useMemo(() => {
+    return sortedTodods.filter((todo) =>
+      todo.text.toLowerCase().includes(Search?.toLowerCase() || "")
+    );
+  }, [sortedTodods, Search]);
+  
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -142,12 +162,43 @@ function App() {
       >
         Todo List Using UseMemo And UseCallback
       </h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
+          gap: "14px",
+        }}
+      >
+        <input
+          type="text"
+          style={{ width: "20%", height: "30px" }}
+          name="search"
+          value={Search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          placeholder="Search Here"
+        />
+        {/* <button
+          style={{
+            backgroundColor: "mediumaquamarine",
+            padding: "10px",
+            border: "0",
+            borderRadius: "10px",
+          }}
+          onClick={filteredTodo}
+        >
+          Reset
+        </button> */}
+      </div>
       <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
         <input
           type="text"
           style={{ height: "30px" }}
           value={input}
           onChange={handleChange}
+          placeholder="Add Your Task"
         />
         <button
           style={{
@@ -162,28 +213,32 @@ function App() {
           Add
         </button>
         <div style={{ display: "flex", gap: "10px" }}>
-          <FcAlphabeticalSortingAz
-            style={{
-              fontSize: "35px",
-              backgroundColor: "darkred",
-              borderRadius: "5px",
-            }}
-            onClick={soringAtoZUseMemo}
-          />
-          <FcAlphabeticalSortingZa
-            style={{
-              fontSize: "35px",
-              backgroundColor: "darkred",
-              borderRadius: "5px",
-            }}
-            onClick={sortingZtoAUseMemo}
-          />
+          {sortOrder == "asc" ? (
+            <FcAlphabeticalSortingAz
+              style={{
+                fontSize: "35px",
+                backgroundColor: "darkred",
+                borderRadius: "5px",
+              }}
+              onClick={toggleSorted}
+            />
+          ) : (
+            <FcAlphabeticalSortingZa
+              style={{
+                fontSize: "35px",
+                backgroundColor: "darkred",
+                borderRadius: "5px",
+              }}
+              onClick={toggleSorted}
+            />
+          )}
         </div>
       </div>
 
       <div style={{ marginLeft: "40%" }}>
-        {todos.length === 0 && <h1>No Todos Found</h1>}
-        {todos.map((e, index) => (
+        {filteredTodo.length === 0 && <h1>No Todos Found</h1>}
+
+        {filteredTodo.map((e, index) => (
           <div
             style={{ display: "flex", alignItems: "center", gap: "5px" }}
             key={index}
