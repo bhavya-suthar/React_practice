@@ -22,6 +22,52 @@ function App() {
   });
   console.log("🚀 ~ App ~ todos:", todos);
 
+  const [IsEdit, setIsEdit] = useState(false);
+  console.log("🚀 ~ App ~ IsEdit:", IsEdit);
+
+  const [EditTodoId, setEditTodoId] = useState(null);
+  console.log("🚀 ~ App ~ EditTodoId:", EditTodoId);
+
+  // const handleEdit = (id) => {
+  //   const selctedTodo = sortedTodods.find((todo) => todo.id == id);
+  //   console.log("🚀 ~ handleEdit ~ selctedTodo:", selctedTodo);
+  //   setInput(selctedTodo.text);
+  //   setIsEdit(true);
+  //   setEditTodoId(id)
+  // };
+
+  // const handleSave =(e) =>{
+  //   setTodos(
+  //     todos.map((todo)=>todo.id === EditTodoId ? {...todo,text : input} : todo)
+  //   )
+  //   setInput("")
+  //   setEditTodoId(null)
+  //   setIsEdit(false)
+
+  // }
+
+  const handleEdit = useCallback(
+    (id) => {
+      const selctedTodo = sortedTodods.find((todo) => todo.id == id);
+      console.log("🚀 ~ handleEdit ~ selctedTodo:", selctedTodo);
+      setInput(selctedTodo.text);
+      setIsEdit(true);
+      setEditTodoId(id);
+    },
+    [todos]
+  );
+
+  const handleSave = useCallback(() => {
+   setTodos(
+    todos.map((todo) =>
+      todo.id === EditTodoId ? { ...todo, text: input } : todo
+    ))
+
+    setInput("");
+    setEditTodoId(null);
+    setIsEdit(false);
+  }, [input, EditTodoId]);
+
   const handleChange = (e) => {
     setInput(e.target.value);
   };
@@ -145,7 +191,6 @@ function App() {
       todo.text.toLowerCase().includes(Search?.toLowerCase() || "")
     );
   }, [sortedTodods, Search]);
-  
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -200,18 +245,34 @@ function App() {
           onChange={handleChange}
           placeholder="Add Your Task"
         />
-        <button
-          style={{
-            backgroundColor: "green",
-            border: "0",
-            height: "35px",
-            width: "55px",
-            borderRadius: "5px",
-          }}
-          onClick={add}
-        >
-          Add
-        </button>
+
+        {!IsEdit ? (
+          <button
+            style={{
+              backgroundColor: "green",
+              border: "0",
+              height: "35px",
+              width: "55px",
+              borderRadius: "5px",
+            }}
+            onClick={add}
+          >
+            Add
+          </button>
+        ) : (
+          <button
+            style={{
+              backgroundColor: "green",
+              border: "0",
+              height: "35px",
+              width: "55px",
+              borderRadius: "5px",
+            }}
+            onClick={handleSave}
+          >
+            Edit
+          </button>
+        )}
         <div style={{ display: "flex", gap: "10px" }}>
           {sortOrder == "asc" ? (
             <FcAlphabeticalSortingAz
@@ -258,6 +319,19 @@ function App() {
               onClick={() => handleDelete(e.id)}
             >
               Delete
+            </button>
+            <button
+              style={{
+                height: "30px",
+                backgroundColor: "mediumvioletred",
+                color: "white",
+                border: "0",
+                borderRadius: "3px",
+                padding: "10px",
+              }}
+              onClick={() => handleEdit(e.id)}
+            >
+              Update
             </button>
           </div>
         ))}
