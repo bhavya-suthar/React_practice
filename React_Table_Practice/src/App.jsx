@@ -39,6 +39,7 @@ function App() {
 
   const [suggestion, setSuggestion] = useState([]);
   console.log("🚀 ~ App ~ suggestion:", suggestion);
+
   const { product, filteredProduct } = useSelector((state) => state.table);
   console.log("🚀 ~ App ~ filteredProduct:", filteredProduct);
   console.log("🚀 ~ App ~ product:", product);
@@ -48,12 +49,12 @@ function App() {
     setSearch(value);
 
     if (value === "") {
-      dispatch(resetSearch());
       setSuggestion([]);
+      dispatch(resetSearch());
     } else {
       const matchedSuggestions = product
-        .map((item) => item.title)
-        .filter((title) => title.toLowerCase().includes(value.toLowerCase()));
+      .map((item) => item.title)
+      .filter((title) => title.toLowerCase().includes(value.toLowerCase()));
       setSuggestion(matchedSuggestions);
       // dispatch(filteredSearch(search));
     }
@@ -90,9 +91,9 @@ function App() {
     },
   ];
 
-  // useEffect(() => {
-  //   dispatch(resetSearch());
-  // }, [search, product]);
+  useEffect(() => {
+    dispatch(resetSearch());
+  }, []);
 
   return (
     <>
@@ -155,7 +156,7 @@ function App() {
             flexDirection: "column",
             justifyContent: "center",
             // alignItems: " center",
-            marginLeft:"390px"
+            marginLeft:"440px"
           }}
         >
           <ul
@@ -181,6 +182,7 @@ function App() {
           </ul>{" "}
         </div>
       )}
+      
       <DataTable
         data={
           filteredProduct && filteredProduct.length > 0

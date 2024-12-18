@@ -13,7 +13,8 @@ const persistConfig ={
     storage,
 }
 
-const rootReducer = combineReducers({ sidebar:SidebarReducer,
+const rootReducer = combineReducers({ 
+    sidebar:SidebarReducer,
     category:CategoryReducer,
     product:ProductReducer,
     cart:CartReducer,
